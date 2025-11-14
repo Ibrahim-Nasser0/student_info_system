@@ -1,0 +1,41 @@
+{
+  "record_count": 2,
+  "structure_name": "dynamic_transaction",
+  "structure_metadata": {
+    "name": "dynamic_transaction",
+    "type": "delimiter",
+    "record_delimiter": "\n",
+    "schema": {
+      "schema_name": "transaction_schema",
+      "fields": [
+        {
+          "name": "transaction_id",
+          "type": "fixed_size",
+          "size": 20,
+          "data_type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "length_indicator",
+          "length_size": 2,
+          "data_type": "string"
+        },
+        {
+          "name": "merchant_info",
+          "type": "key_value",
+          "pair_delimiter": ":",
+          "field_delimiter": ";",
+          "data_type": "string"
+        },
+        {
+          "name": "timestamp",
+          "type": "delimiter",
+          "delimiter": "|",
+          "data_type": "string"
+        }
+      ]
+    }
+  },
+  "created_at": "2025-11-13T19:40:06.662277",
+  "file_size": 172
+}
