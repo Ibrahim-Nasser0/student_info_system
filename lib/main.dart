@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:student_info_system/features/auth/view/login_view.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {

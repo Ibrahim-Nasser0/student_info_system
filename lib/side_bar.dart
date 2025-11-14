@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:student_info_system/features/auth/view/login_view.dart';
 import 'package:student_info_system/features/courses/view/courses_view.dart';
 import 'package:student_info_system/features/home/view/home_view.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';
@@ -151,12 +152,12 @@ class _NavigationContent extends StatelessWidget {
               ),
             );
           case 6:
-            return Center(
-              child: Text(
-                'Logout',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginView()),
+              );
+            });
+            return SizedBox.shrink();
           default:
             return Center(
               child: Text(
