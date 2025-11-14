@@ -1,0 +1,35 @@
+{
+  "record_count": 5,
+  "structure_name": "indexed_scores",
+  "structure_metadata": {
+    "name": "indexed_scores",
+    "type": "indexed",
+    "record_delimiter": "\n",
+    "index_size": 5,
+    "schema": {
+      "schema_name": "indexed_schema",
+      "fields": [
+        {
+          "name": "id",
+          "type": "fixed_size",
+          "size": 5,
+          "data_type": "string"
+        },
+        {
+          "name": "name",
+          "type": "delimiter",
+          "delimiter": "|",
+          "data_type": "string"
+        },
+        {
+          "name": "score",
+          "type": "delimiter",
+          "delimiter": "|",
+          "data_type": "string"
+        }
+      ]
+    }
+  },
+  "created_at": "2025-11-13T18:48:06.977938",
+  "file_size": 73
+}

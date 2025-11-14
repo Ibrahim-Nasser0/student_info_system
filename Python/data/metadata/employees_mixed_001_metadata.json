@@ -1,0 +1,47 @@
+{
+  "record_count": 2,
+  "structure_name": "employee_record",
+  "structure_metadata": {
+    "name": "employee_record",
+    "type": "delimiter",
+    "record_delimiter": "\n",
+    "schema": {
+      "schema_name": "employee_schema",
+      "fields": [
+        {
+          "name": "emp_id",
+          "type": "fixed_size",
+          "size": 8,
+          "data_type": "string"
+        },
+        {
+          "name": "name",
+          "type": "delimiter",
+          "delimiter": "|",
+          "data_type": "string"
+        },
+        {
+          "name": "age",
+          "type": "fixed_size",
+          "size": 3,
+          "data_type": "string"
+        },
+        {
+          "name": "bio",
+          "type": "length_indicator",
+          "length_size": 2,
+          "data_type": "string"
+        },
+        {
+          "name": "skills",
+          "type": "key_value",
+          "pair_delimiter": ":",
+          "field_delimiter": ",",
+          "data_type": "string"
+        }
+      ]
+    }
+  },
+  "created_at": "2025-11-13T18:48:07.001549",
+  "file_size": 203
+}

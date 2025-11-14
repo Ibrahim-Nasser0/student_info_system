@@ -1,0 +1,29 @@
+{
+  "record_count": 2,
+  "structure_name": "config_record",
+  "structure_metadata": {
+    "name": "config_record",
+    "type": "delimiter",
+    "record_delimiter": "\n",
+    "schema": {
+      "schema_name": "config_schema",
+      "fields": [
+        {
+          "name": "device_id",
+          "type": "delimiter",
+          "delimiter": "|",
+          "data_type": "string"
+        },
+        {
+          "name": "settings",
+          "type": "key_value",
+          "pair_delimiter": "=",
+          "field_delimiter": "&",
+          "data_type": "string"
+        }
+      ]
+    }
+  },
+  "created_at": "2025-11-13T18:48:06.967719",
+  "file_size": 102
+}
