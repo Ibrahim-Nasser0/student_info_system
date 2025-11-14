@@ -4,6 +4,7 @@ import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student_info_system/features/auth/view/login_view.dart';
 import 'package:student_info_system/features/courses/view/courses_view.dart';
+import 'package:student_info_system/features/departments/view/department_view.dart';
 import 'package:student_info_system/features/home/view/home_view.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';
 
@@ -131,12 +132,8 @@ class _NavigationContent extends StatelessWidget {
           case 2:
             return CoursesView();
           case 3:
-            return Center(
-              child: Text(
-                'Departments Screen',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
-              ),
-            );
+            return DepartmentView();
+
           case 4:
             return Center(
               child: Text(

@@ -13,17 +13,18 @@ class CustomButton extends StatelessWidget {
 
       child: Container(
         height: 60.h,
-        width: 200.w,
+        width: 250.w,
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: AppColors.accentBlue,
           borderRadius: BorderRadius.circular(15.0.r),
         ),
         child: Row(
           children: [
+            Spacer(),
             Icon(Icons.add, color: Colors.white, size: 24.sp),
-            Gap(10),
+            Gap(5.w),
             Text(
               tittle,
               style: TextStyle(
@@ -32,6 +33,7 @@ class CustomButton extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Spacer(),
           ],
         ),
       ),

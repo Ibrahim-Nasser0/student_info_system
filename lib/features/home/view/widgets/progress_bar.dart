@@ -1,5 +1,6 @@
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/features/home/models/progress_model.dart';
 
@@ -36,15 +37,15 @@ class ProgressBar extends StatelessWidget {
                 style: TextStyle(
                   color: color,
                   fontWeight: FontWeight.w300,
-                  fontSize: 60,
+                  fontSize: 65.sp,
                 ),
               ),
               Text(
                 progressModel.title,
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: 30.sp,
                 ),
               ),
             ],
