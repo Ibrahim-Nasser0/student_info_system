@@ -1,0 +1,22 @@
+lib/
+ └── data/
+      ├── storage/
+      │     ├── file_manager.py(Manages file read/write operations)
+      │     ├── header/
+      │     │      └── file_header.py(Defines metadata for stored files)
+      │     ├── formats/(Different file format handlers)
+      │     │      ├── fixed_length_storage.py
+      │     │      ├── delimited_storage.py
+      │     │      ├── variable_length_storage.py
+      │     └── migration/(File format migration tools)
+      │            └── file_migrator.py (Converts between different file formats)
+      │
+      ├── models/
+      │     └── student_model.py (Defines the Student data structure)
+      │
+      ├── repository/(Data access layer)
+      │     └── student_repository.py(Handles CRUD operations for Student records)
+      │
+      └── helpers/(Utility functions for data handling)
+            ├── file_utils.py(General file utility functions)
+            └── time_measure.py(Measures time taken for file operations)
