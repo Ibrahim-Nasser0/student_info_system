@@ -6,6 +6,7 @@ import 'package:student_info_system/features/auth/view/login_view.dart';
 import 'package:student_info_system/features/courses/view/courses_view.dart';
 import 'package:student_info_system/features/departments/view/department_view.dart';
 import 'package:student_info_system/features/home/view/home_view.dart';
+import 'package:student_info_system/features/settings/view/settings_view.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';
 
 class SideBar extends StatelessWidget {
@@ -142,12 +143,7 @@ class _NavigationContent extends StatelessWidget {
               ),
             );
           case 5:
-            return Center(
-              child: Text(
-                'Settings Screen',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
-              ),
-            );
+            return StorageSettings();
           case 6:
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(context).pushReplacement(
