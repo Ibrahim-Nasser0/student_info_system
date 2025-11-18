@@ -6,6 +6,7 @@ import 'package:student_info_system/features/auth/view/login_view.dart';
 import 'package:student_info_system/features/courses/view/courses_view.dart';
 import 'package:student_info_system/features/departments/view/department_view.dart';
 import 'package:student_info_system/features/home/view/home_view.dart';
+import 'package:student_info_system/features/importData(CSV)/view/import_data.dart';
 import 'package:student_info_system/features/settings/view/settings_view.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';
 
@@ -106,7 +107,7 @@ class AppSidebar extends StatelessWidget {
         SidebarXItem(icon: Icons.people, label: ' Students'),
         SidebarXItem(icon: Icons.book, label: ' Courses'),
         SidebarXItem(icon: Icons.account_balance, label: ' Departments'),
-        SidebarXItem(icon: Icons.bar_chart, label: ' Grades / Reports'),
+        SidebarXItem(icon: Icons.bar_chart, label: 'Import Data (CSV)'),
         SidebarXItem(icon: Icons.settings, label: ' Settings'),
         SidebarXItem(icon: Icons.logout, label: ' Logout'),
       ],
@@ -136,12 +137,7 @@ class _NavigationContent extends StatelessWidget {
             return DepartmentView();
 
           case 4:
-            return Center(
-              child: Text(
-                'Grades / Reports Screen',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
-              ),
-            );
+            return ImportData();
           case 5:
             return StorageSettings();
           case 6:
@@ -175,7 +171,7 @@ String _getTitleByIndex(int index) {
     case 3:
       return 'Departments';
     case 4:
-      return 'Grades / Reports';
+      return 'Import Data (CSV)';
     case 5:
       return 'Settings';
     case 6:

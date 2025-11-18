@@ -4,11 +4,19 @@ import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/core/shared/custom_botton.dart';
 import 'package:student_info_system/core/shared/custom_text_field.dart';
+import 'package:student_info_system/features/students/models/searching_methods_model.dart';
 import 'package:student_info_system/features/students/view/widgets/custom_search_botton.dart';
 
 class SearchingCoursesMethods extends StatelessWidget {
-  const SearchingCoursesMethods({super.key});
+  SearchingCoursesMethods({super.key});
 
+  final List<SearchingMethodsModel> searchingMethods = [
+    SearchingMethodsModel(text: 'Code', index: 0),
+    SearchingMethodsModel(text: 'Name', index: 1),
+    SearchingMethodsModel(text: 'Creadit Hours', index: 2),
+    SearchingMethodsModel(text: 'Enrolled Students', index: 3),
+    SearchingMethodsModel(text: 'Department', index: 4),
+  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,15 +39,15 @@ class SearchingCoursesMethods extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomSearchButton(text: 'Code', isSelected: true),
+            CustomSearchButton(searchingMethods: searchingMethods[0]),
             Gap(10),
-            CustomSearchButton(text: 'Name'),
+            CustomSearchButton(searchingMethods: searchingMethods[1]),
             Gap(10),
-            CustomSearchButton(text: 'Creadit Hours'),
+            CustomSearchButton(searchingMethods: searchingMethods[2]),
             Gap(10),
-            CustomSearchButton(text: 'Enrolled Students'),
+            CustomSearchButton(searchingMethods: searchingMethods[3]),
             Gap(10),
-            CustomSearchButton(text: 'Department'),
+            CustomSearchButton(searchingMethods: searchingMethods[4]),
           ],
         ),
       ],

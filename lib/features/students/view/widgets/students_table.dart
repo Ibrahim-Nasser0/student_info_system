@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
+import 'package:flutter_python_bridge/flutter_python_bridge.dart';
+
+final pyBridge = PythonBridge();
 
 class StudentDataTable extends StatelessWidget {
   const StudentDataTable({super.key});
@@ -29,15 +32,22 @@ class StudentDataTable extends StatelessWidget {
     {
       'id': 104,
       'name': 'Abdullah',
-      'Department': 'CS',
-      'gpa': 2.4,
-      'status': 'Inactive',
+      'Department': 'زارعه قسم خراطيم',
+      'gpa': 9.4,
+      'status': 'Active',
     },
     {
       'id': 105,
       'name': 'Mohamed',
       'Department': 'CS',
       'gpa': 2.9,
+      'status': 'Active',
+    },
+    {
+      'id': 109,
+      'name': 'Mo Magdy',
+      'Department': 'CS',
+      'gpa': 3.9,
       'status': 'Active',
     },
   ];

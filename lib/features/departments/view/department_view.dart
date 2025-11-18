@@ -3,27 +3,51 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/core/shared/custom_botton.dart';
+import 'package:student_info_system/core/shared/custom_text_field.dart';
+import 'package:student_info_system/features/departments/models/department_model.dart';
 import 'package:student_info_system/features/departments/view/widgets/department_card.dart';
 
-class DepartmentView extends StatelessWidget {
-  const DepartmentView({super.key});
-  final List<Map<String, dynamic>> departmentsData = const [
-    {'name': 'Computer Science', 'code': 'CS', 'students': 120, 'courses': 15},
-    {
-      'name': 'Electrical Engineering',
-      'code': 'EE',
-      'students': 85,
-      'courses': 12,
-    },
-    {
-      'name': 'Business Administration',
-      'code': 'BA',
-      'students': 150,
-      'courses': 20,
-    },
-    {'name': 'Arts & Humanities', 'code': 'AH', 'students': 95, 'courses': 18},
-    {'name': 'Mathmtics', 'code': 'MT', 'students': 150, 'courses': 60},
+class DepartmentView extends StatefulWidget {
+  DepartmentView({super.key});
+
+  @override
+  State<DepartmentView> createState() => _DepartmentViewState();
+}
+
+class _DepartmentViewState extends State<DepartmentView> {
+   List<DepartmentModel> departments = [
+    DepartmentModel(
+      name: 'Computer Science',
+      code: 'CS',
+      totalCourses: 120,
+      enrolledStudents: 150,
+    ),
+    DepartmentModel(
+      name: 'Electrical Engineering',
+      code: 'EE',
+      totalCourses: 100,
+      enrolledStudents: 85,
+    ),
+    DepartmentModel(
+      name: 'Business Administration',
+      code: 'BA',
+      totalCourses: 130,
+      enrolledStudents: 150,
+    ),
+    DepartmentModel(
+      name: 'Arts & Humanities',
+      code: 'AH',
+      totalCourses: 110,
+      enrolledStudents: 95,
+    ),
+    DepartmentModel(
+      name: 'Mathmtics',
+      code: 'MT',
+      totalCourses: 200,
+      enrolledStudents: 150,
+    ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +55,7 @@ class DepartmentView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(45),
+          const Gap(45),
           Text(
             'Department View',
             style: TextStyle(
@@ -41,34 +65,164 @@ class DepartmentView extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
-          Gap(20),
-          CustomButton(tittle: 'Add Department'),
-          Gap(20),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // عمودين في كل صف
-                crossAxisSpacing: 16.0,
-                mainAxisSpacing: 16.0,
-                childAspectRatio: 2.6, // لضبط ارتفاع البطاقة
-              ),
-              itemCount: departmentsData.length,
-              itemBuilder: (context, index) {
-                final dept = departmentsData[index];
-                return DepartmentCard(
-                  departmentName: dept['name'],
-                  departmentCode: dept['code'],
-                  totalStudents: dept['students'],
-                  totalCourses: dept['courses'],
-                  onViewDetails: () {},
-                  onEdit: () {},
-                  onDelete: () {},
-                );
-              },
-            ),
+          const Gap(20),
+          CustomButton(
+            tittle: 'Add Department',
+            onPressed: () async {
+              await showAddDepartmentPopup(context, departments);
+              setState(() {});
+            },
           ),
+          const Gap(20),
+          DepartmentGrid(departments: departments),
         ],
       ),
     );
   }
+}
+
+class DepartmentGrid extends StatefulWidget {
+  const DepartmentGrid({super.key, required this.departments});
+
+  final List<DepartmentModel> departments;
+
+  @override
+  State<DepartmentGrid> createState() => _DepartmentGridState();
+}
+
+class _DepartmentGridState extends State<DepartmentGrid> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+          childAspectRatio: 2.3,
+        ),
+        itemCount: widget.departments.length,
+        itemBuilder: (context, index) {
+          return DepartmentCard(
+            departmentName: widget.departments[index].name,
+            departmentCode: widget.departments[index].code,
+            totalStudents: widget.departments[index].enrolledStudents,
+            totalCourses: widget.departments[index].totalCourses,
+            onViewDetails: () {},
+            onEdit: () async {
+              await EdaitDepartmentPopup(context, widget.departments[index]);
+              setState(() {});
+            },
+            onDelete: () {
+              setState(() {
+                widget.departments.removeAt(index);
+              });
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+Future showAddDepartmentPopup(BuildContext context, departments) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      // Controllers عشان نحتفظ بالبيانات المدخلة
+      final nameController = TextEditingController();
+      final codeController = TextEditingController();
+
+      return AlertDialog(
+        backgroundColor: AppColors.secondaryBackground,
+        title: const Text(
+          'Add New Department',
+          style: TextStyle(color: AppColors.textPrimary),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomTextField(hintText: 'Name', controller: nameController),
+              Gap(10),
+              CustomTextField(hintText: 'Code', controller: codeController),
+              Gap(10),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // لإغلاق البوب أب
+            },
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: AppColors.textPrimary),
+            ),
+          ),
+          CustomButton(
+            tittle: 'Add',
+            onPressed: () {
+              DepartmentModel newDepartment = DepartmentModel(
+                name: nameController.text,
+                code: codeController.text,
+              );
+              departments.add(newDepartment);
+
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future EdaitDepartmentPopup(BuildContext context, DepartmentModel department) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      // Controllers عشان نحتفظ بالبيانات المدخلة
+      final nameController = TextEditingController(text: department.name);
+      final codeController = TextEditingController(text: department.code);
+
+      return AlertDialog(
+        backgroundColor: AppColors.secondaryBackground,
+        title: const Text(
+          'Add New Department',
+          style: TextStyle(color: AppColors.textPrimary),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomTextField(hintText: 'Name', controller: nameController),
+              Gap(10),
+              CustomTextField(hintText: 'Code', controller: codeController),
+              Gap(10),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: AppColors.textPrimary),
+            ),
+          ),
+          CustomButton(
+            tittle: 'Save',
+            onPressed: () {
+              department.name = nameController.text;
+              department.code = codeController.text;
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

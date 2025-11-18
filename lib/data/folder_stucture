@@ -1,22 +1,46 @@
 lib/
- └── data/
-      ├── storage/
-      │     ├── file_manager.py(Manages file read/write operations)
-      │     ├── header/
-      │     │      └── file_header.py(Defines metadata for stored files)
-      │     ├── formats/(Different file format handlers)
-      │     │      ├── fixed_length_storage.py
-      │     │      ├── delimited_storage.py
-      │     │      ├── variable_length_storage.py
-      │     └── migration/(File format migration tools)
-      │            └── file_migrator.py (Converts between different file formats)
-      │
-      ├── models/
-      │     └── student_model.py (Defines the Student data structure)
-      │
-      ├── repository/(Data access layer)
-      │     └── student_repository.py(Handles CRUD operations for Student records)
-      │
-      └── helpers/(Utility functions for data handling)
-            ├── file_utils.py(General file utility functions)
-            └── time_measure.py(Measures time taken for file operations)
+ ├── Core/
+ │    ├── constants/
+ │    │     └── app_colors.dart (Defines color constants for the app) //T
+ │    └── Shared/
+ ├── data/
+ │    ├── storage/
+ │    │     ├── file_manager.py(Manages file read/write operations) //T
+ │    │     ├── header/
+ │    │     │      └── file_header.py(Defines metadata for stored files)//T
+ │    │     ├── formats/(Different file format handlers)
+ │    │     │    ├── field/(Different field types)
+ │    │     │    │     ├── fixed_length_field.py//T
+ │    │     │    │     ├── delimited_field.py//T
+ │    │     │    │     ├── Keyword_field.py//T
+ │    │     │    │     └── length_indicator_field.py//T
+ │    |     |    |
+ │    │     │    └── record/(Different record structures)//T
+ │    │     │          ├── fixed_length_record.py//T
+ │    │     │          ├── delimited_record.py//T
+ │    │     │          ├── length_indicator_record.py//T
+ │    │     │          └── number_of_field_in_record.py//T
+ │    |     |
+ │    │     └── migration/(File format migration tools)
+ │    │            └── file_migrator.py (Converts between different file formats)
+ │    │
+ │    ├── models/(Data models)
+ │    │     ├── courses_model.py(Defines the Course data structure)
+ │    │     └── student_model.py (Defines the Student data structure)
+ │    │
+ │    ├── repository/(Data access layer)
+ │    │     ├── courses_repositor.py(Handles CRUD operations for Course records) 
+ │    │     └── student_repository.py(Handles CRUD operations for Student records)
+ │    │
+ │    └── helpers/(Utility functions for data handling)
+ │          ├── file_utils.py(General file utility functions)
+ |          └── time_measure.py(Measures time taken for file operations)
+ ├── features/
+ │    ├── courses/(view, controller, model)
+ │    ├── departments/(view, controller, model)
+ │    ├── home/(view, controller, model)
+ │    ├── importData(CSV)/(view, controller, model)
+ │    ├── settings/(view, controller, model)
+ │    └── students/(view, controller, model)
+ ├── side_bar.dart
+ └── main.dart

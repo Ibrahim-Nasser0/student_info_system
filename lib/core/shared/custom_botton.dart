@@ -4,12 +4,13 @@ import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.tittle});
+  const CustomButton({super.key, required this.tittle, this.onPressed});
   final String tittle;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onPressed,
 
       child: Container(
         height: 60.h,

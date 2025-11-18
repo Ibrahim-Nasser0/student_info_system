@@ -62,7 +62,7 @@ class DepartmentCard extends StatelessWidget {
               ),
               const Divider(color: AppColors.divider, height: 16),
 
-              // === 2. معلومات سريعة ===
+             
               InfoRow(
                 icon: Icons.people,
                 label: 'Total Students:',
@@ -75,7 +75,7 @@ class DepartmentCard extends StatelessWidget {
                 value: '$totalCourses',
               ),
 
-              const SizedBox(height: 16),
+              const Spacer(),
 
               // === 3. أزرار الإجراءات ===
               Row(

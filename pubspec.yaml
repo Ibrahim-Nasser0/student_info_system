@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.10.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,6 +38,8 @@ dependencies:
   gap: ^3.0.1
   sidebarx: ^0.17.2
   dashed_circular_progress_bar: ^0.0.6
+  flutter_python_bridge: ^0.2.0
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
