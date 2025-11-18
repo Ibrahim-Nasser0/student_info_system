@@ -1,189 +1,150 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
-import 'package:flutter_python_bridge/flutter_python_bridge.dart';
+import 'package:student_info_system/features/students/models/student_model.dart';
+import 'package:student_info_system/features/students/view/student_view.dart';
 
-final pyBridge = PythonBridge();
 
-class StudentDataTable extends StatelessWidget {
-  const StudentDataTable({super.key});
 
-  final List<Map<String, dynamic>> students = const [
-    {
-      'id': 101,
-      'name': 'Ibrahim',
-      'Department': 'CS',
-      'gpa': 3.8,
-      'status': 'Active',
-    },
-    {
-      'id': 102,
-      'name': 'Ahmed',
-      'Department': 'CS',
-      'gpa': 1.9,
-      'status': 'View',
-    },
-    {
-      'id': 103,
-      'name': 'Amr',
-      'Department': 'CS',
-      'gpa': 3.2,
-      'status': 'Active',
-    },
-    {
-      'id': 104,
-      'name': 'Abdullah',
-      'Department': 'زارعه قسم خراطيم',
-      'gpa': 9.4,
-      'status': 'Active',
-    },
-    {
-      'id': 105,
-      'name': 'Mohamed',
-      'Department': 'CS',
-      'gpa': 2.9,
-      'status': 'Active',
-    },
-    {
-      'id': 109,
-      'name': 'Mo Magdy',
-      'Department': 'CS',
-      'gpa': 3.9,
-      'status': 'Active',
-    },
+class StudentTable extends StatelessWidget {
+  StudentTable({super.key});
+  final List<StudentModel> students = [
+    StudentModel(
+      id: 1,
+      name: 'Ibrahim Nasser',
+      gpa: 3,
+      department: 'Computer Science',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 2,
+      name: 'Sara Ahmed',
+      gpa: 3,
+      department: 'Information Systems',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 3,
+      name: 'Omar Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
+    StudentModel(
+      id: 4,
+      name: 'Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
+    StudentModel(
+      id: 1,
+      name: 'Ibrahim Nasser',
+      gpa: 3,
+      department: 'Computer Science',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 2,
+      name: 'Sara Ahmed',
+      gpa: 3,
+      department: 'Information Systems',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 3,
+      name: 'Omar Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
+    StudentModel(
+      id: 4,
+      name: 'Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
+    StudentModel(
+      id: 1,
+      name: 'Ibrahim Nasser',
+      gpa: 3,
+      department: 'Computer Science',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 2,
+      name: 'Sara Ahmed',
+      gpa: 3,
+      department: 'Information Systems',
+      level: 'three',
+    ),
+    StudentModel(
+      id: 3,
+      name: 'Omar Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
+    StudentModel(
+      id: 4,
+      name: 'Hassan',
+      gpa: 4,
+      department: 'Software Engineering',
+      level: 'four',
+    ),
   ];
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: SizedBox(
-        width: 1000,
-        child: DataTable(
-          headingRowColor: MaterialStateProperty.all(
-            AppColors.secondaryBackground,
+    double _w = MediaQuery.of(context).size.width;
+    return Container(
+      width: double.infinity,
+      height: 680.h,
+      decoration: BoxDecoration(
+        color: AppColors.shadow,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+
+      child: Column(
+        children: [
+          StudentHeadingDataRow(),
+          Gap(10),
+
+          Expanded(
+            child: AnimationLimiter(
+              child: ListView.separated(
+                physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                itemCount: students.length,
+                itemBuilder: (BuildContext c, int index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    delay: Duration(milliseconds: 100),
+
+                    child: SlideAnimation(
+                      duration: Duration(milliseconds: 2500),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      horizontalOffset: 30,
+                      verticalOffset: 300.0,
+                      child: FlipAnimation(
+                        duration: Duration(milliseconds: 3000),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        flipAxis: FlipAxis.y,
+                        child: StudentDataRow(student: students[index]),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Gap(15.h);
+                },
+              ),
+            ),
           ),
-
-          showBottomBorder: true,
-
-          border: TableBorder(
-            horizontalInside: const BorderSide(
-              color: AppColors.divider,
-              width: 1,
-            ),
-            top: const BorderSide(color: AppColors.divider, width: 1),
-            bottom: const BorderSide(color: AppColors.divider, width: 1),
-          ),
-
-          columns: [
-            DataColumn(
-              label: Text(
-                'ID',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Name',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Department',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'GPA',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              numeric: true,
-            ),
-            DataColumn(
-              label: Text(
-                'Status',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
-
-          rows: students.map((student) {
-            Color gpaColor = student['gpa'] >= 2.5 ? Colors.green : Colors.red;
-
-            return DataRow(
-              color: MaterialStateProperty.all(AppColors.textPrimary),
-              cells: [
-                DataCell(
-                  Text(
-                    student['id'].toString(),
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['name'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['Department'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['gpa'].toString(),
-                    style: TextStyle(
-                      color: gpaColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['status'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }).toList(),
-        ),
+        ],
       ),
     );
   }

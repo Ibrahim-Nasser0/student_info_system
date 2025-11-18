@@ -1,318 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
+import 'package:student_info_system/features/courses/models/course_model.dart';
+import 'package:student_info_system/features/courses/view/courses_view.dart';
 
-class CoursesDataTable extends StatelessWidget {
-  const CoursesDataTable({super.key});
-
-  final List<Map<String, dynamic>> students = const [
-    {
-      'Code': 'MT101',
-      'name': 'Math 1',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT104',
-      'name': 'Math 2',
-      'Creadit Hours': 3,
-      'Enrolled Students': 90,
-      'Department': 'CS ',
-    },
-    {
-      'Code': 'MT172',
-      'name': 'Database',
-      'Creadit Hours': 3,
-      'Enrolled Students': 40,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Data Structuer',
-      'Creadit Hours': 3,
-      'Enrolled Students': 30,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT190',
-      'name': 'OOP',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Math 1',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT104',
-      'name': 'Math 2',
-      'Creadit Hours': 3,
-      'Enrolled Students': 90,
-      'Department': 'CS ',
-    },
-    {
-      'Code': 'MT172',
-      'name': 'Database',
-      'Creadit Hours': 3,
-      'Enrolled Students': 40,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Data Structuer',
-      'Creadit Hours': 3,
-      'Enrolled Students': 30,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT190',
-      'name': 'OOP',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Math 1',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT104',
-      'name': 'Math 2',
-      'Creadit Hours': 3,
-      'Enrolled Students': 90,
-      'Department': 'CS ',
-    },
-    {
-      'Code': 'MT172',
-      'name': 'Database',
-      'Creadit Hours': 3,
-      'Enrolled Students': 40,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Data Structuer',
-      'Creadit Hours': 3,
-      'Enrolled Students': 30,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT190',
-      'name': 'OOP',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Math 1',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT104',
-      'name': 'Math 2',
-      'Creadit Hours': 3,
-      'Enrolled Students': 90,
-      'Department': 'CS ',
-    },
-    {
-      'Code': 'MT172',
-      'name': 'Database',
-      'Creadit Hours': 3,
-      'Enrolled Students': 40,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Data Structuer',
-      'Creadit Hours': 3,
-      'Enrolled Students': 30,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT190',
-      'name': 'OOP',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Math 1',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT104',
-      'name': 'Math 2',
-      'Creadit Hours': 3,
-      'Enrolled Students': 90,
-      'Department': 'CS ',
-    },
-    {
-      'Code': 'MT172',
-      'name': 'Database',
-      'Creadit Hours': 3,
-      'Enrolled Students': 40,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT101',
-      'name': 'Data Structuer',
-      'Creadit Hours': 3,
-      'Enrolled Students': 30,
-      'Department': 'CS',
-    },
-    {
-      'Code': 'MT190',
-      'name': 'OOP',
-      'Creadit Hours': 3,
-      'Enrolled Students': 80,
-      'Department': 'CS',
-    },
+class CoursesTable extends StatelessWidget {
+  CoursesTable({super.key});
+  final List<CourseModel> courses = [
+    CourseModel(
+      name: 'Data Structures',
+      code: 'CS201',
+      creditHours: 3,
+      enrolledStudents: 120,
+      instructor: 'Dr. Smith',
+      department: 'Computer Science',
+    ),
+    CourseModel(
+      name: 'Database Systems',
+      code: 'IS301',
+      creditHours: 3,
+      enrolledStudents: 80,
+      instructor: 'Prof. Johnson',
+      department: 'Information Systems',
+    ),
+    CourseModel(
+      name: 'Software Engineering',
+      code: 'SE401',
+      creditHours: 4,
+      enrolledStudents: 60,
+      instructor: 'Dr. Lee',
+      department: 'Software Engineering',
+    ),
+    CourseModel(
+      name: 'Operating Systems',
+      code: 'CS301',
+      creditHours: 3,
+      enrolledStudents: 90,
+      instructor: 'Dr. Brown',
+      department: 'Computer Science',
+    ),
   ];
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: SizedBox(
-        width: 1000,
-        child: DataTable(
-          headingRowColor: MaterialStateProperty.all(
-            AppColors.secondaryBackground,
+    double _w = MediaQuery.of(context).size.width;
+    return Container(
+      width: double.infinity,
+      height: 680.h,
+      decoration: BoxDecoration(
+        color: AppColors.shadow,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+
+      child: Column(
+        children: [
+          CourseHeadingDataRow(),
+          Gap(10),
+
+          Expanded(
+            child: AnimationLimiter(
+              child: ListView.separated(
+                physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                itemCount: courses.length,
+                itemBuilder: (BuildContext c, int index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    delay: Duration(milliseconds: 100),
+
+                    child: SlideAnimation(
+                      duration: Duration(milliseconds: 2500),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      horizontalOffset: 30,
+                      verticalOffset: 300.0,
+                      child: FlipAnimation(
+                        duration: Duration(milliseconds: 3000),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        flipAxis: FlipAxis.y,
+                        child: CourseDataRow(course: courses[index]),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Gap(15.h);
+                },
+              ),
+            ),
           ),
-
-          showBottomBorder: true,
-
-          border: TableBorder(
-            horizontalInside: const BorderSide(
-              color: AppColors.divider,
-              width: 1,
-            ),
-            top: const BorderSide(color: AppColors.divider, width: 1),
-            bottom: const BorderSide(color: AppColors.divider, width: 1),
-          ),
-
-          columns: [
-            DataColumn(
-              label: Text(
-                'Code',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Name',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Creadit Hours',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Enrolled Students',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              numeric: true,
-            ),
-            DataColumn(
-              label: Text(
-                'Department',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
-
-          rows: students.map((student) {
-            return DataRow(
-              color: MaterialStateProperty.all(AppColors.textPrimary),
-              cells: [
-                DataCell(
-                  Text(
-                    student['Code'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['name'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-
-                DataCell(
-                  Text(
-                    student['Creadit Hours'].toString(),
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['Enrolled Students'].toString(),
-                    style: TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    student['Department'],
-                    style: const TextStyle(
-                      color: AppColors.backgroundDark,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }).toList(),
-        ),
+        ],
       ),
     );
   }

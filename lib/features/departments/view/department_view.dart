@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/core/shared/custom_botton.dart';
@@ -8,14 +9,14 @@ import 'package:student_info_system/features/departments/models/department_model
 import 'package:student_info_system/features/departments/view/widgets/department_card.dart';
 
 class DepartmentView extends StatefulWidget {
-  DepartmentView({super.key});
+  const DepartmentView({super.key});
 
   @override
   State<DepartmentView> createState() => _DepartmentViewState();
 }
 
 class _DepartmentViewState extends State<DepartmentView> {
-   List<DepartmentModel> departments = [
+  List<DepartmentModel> departments = [
     DepartmentModel(
       name: 'Computer Science',
       code: 'CS',
@@ -94,32 +95,46 @@ class _DepartmentGridState extends State<DepartmentGrid> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-          childAspectRatio: 2.3,
+      child: AnimationLimiter(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16.0,
+            mainAxisSpacing: 16.0,
+            childAspectRatio: 2.3,
+          ),
+          itemCount: widget.departments.length,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: Duration(milliseconds: 500 + index * 200),
+              columnCount: 2,
+              child: ScaleAnimation(
+                duration: Duration(milliseconds: 1600),
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: DepartmentCard(
+                  departmentName: widget.departments[index].name,
+                  departmentCode: widget.departments[index].code,
+                  totalStudents: widget.departments[index].enrolledStudents,
+                  totalCourses: widget.departments[index].totalCourses,
+                  onViewDetails: () {},
+                  onEdit: () async {
+                    await EdaitDepartmentPopup(
+                      context,
+                      widget.departments[index],
+                    );
+                    setState(() {});
+                  },
+                  onDelete: () {
+                    setState(() {
+                      widget.departments.removeAt(index);
+                    });
+                  },
+                ),
+              ),
+            );
+          },
         ),
-        itemCount: widget.departments.length,
-        itemBuilder: (context, index) {
-          return DepartmentCard(
-            departmentName: widget.departments[index].name,
-            departmentCode: widget.departments[index].code,
-            totalStudents: widget.departments[index].enrolledStudents,
-            totalCourses: widget.departments[index].totalCourses,
-            onViewDetails: () {},
-            onEdit: () async {
-              await EdaitDepartmentPopup(context, widget.departments[index]);
-              setState(() {});
-            },
-            onDelete: () {
-              setState(() {
-                widget.departments.removeAt(index);
-              });
-            },
-          );
-        },
       ),
     );
   }

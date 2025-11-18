@@ -5,7 +5,7 @@ import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/features/auth/view/widgets/footer.dart';
 import 'package:gap/gap.dart';
 
-import 'package:student_info_system/side_bar.dart';
+import 'package:student_info_system/navSidebar/view/side_bar.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});

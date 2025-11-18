@@ -5,7 +5,7 @@ import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/core/shared/custom_botton.dart';
 import 'package:student_info_system/core/shared/custom_text_field.dart';
 import 'package:student_info_system/features/students/models/searching_methods_model.dart';
-import 'package:student_info_system/features/students/view/widgets/custom_search_botton.dart';
+import 'package:student_info_system/core/shared/custom_search_botton.dart';
 
 class SearchingStudentMethods extends StatelessWidget {
   SearchingStudentMethods({super.key});
@@ -39,19 +39,46 @@ class SearchingStudentMethods extends StatelessWidget {
           'Searching With: ',
           style: TextStyle(color: AppColors.textSecondary, fontSize: 25.sp),
         ),
-        Row(
-          children: [
-            CustomSearchButton(searchingMethods: searchingMethods[0]),
-            Gap(10),
-            CustomSearchButton(searchingMethods: searchingMethods[1]),
-            Gap(10),
-            CustomSearchButton(searchingMethods: searchingMethods[2]),
-          ],
-        ),
+        SearchinRow(searchingMethods: searchingMethods),
       ],
     );
   }
 }
+
+class SearchinRow extends StatefulWidget {
+  const SearchinRow({super.key, required this.searchingMethods});
+
+  final List<SearchingMethodsModel> searchingMethods;
+
+  @override
+  State<SearchinRow> createState() => _SearchinRowState();
+}
+
+class _SearchinRowState extends State<SearchinRow> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate(
+        widget.searchingMethods.length,
+        (index) => Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: CustomSearchButton(
+            searchingMethods: widget.searchingMethods[index],
+            onTap: () {
+              setState(() {
+                selectedIndex = index; // حدّد الزر المختار
+              });
+            },
+            isSelected: selectedIndex == index, // اللون يعتمد على selectedIndex
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 void showAddStudentPopup(BuildContext context) {
   showDialog(

@@ -1,5 +1,5 @@
 import '../file_manager.dart';
-import '../models/student_model.dart';
+import '../../features/students/models/student_model.dart';
 import '../storage/formats/record_format.dart';
 
 class StudentRepository {
@@ -13,21 +13,27 @@ class StudentRepository {
     this.fileName = 'students.txt',
   });
 
-  Future<List<Student>> getAll() async {
+  Future<List<StudentModel>> getAll() async {
     if (!fileManager.exists(fileName)) return [];
     final raw = await fileManager.read(fileName);
     final records = recordFormat.decode(raw);
     return records.map((r) {
-      return Student(id: r.fields[0], name: r.fields[1], gpa: r.fields[2]);
+      return StudentModel(
+        id: int.parse(r.fields[0]),
+        name: r.fields[1],
+        gpa: int.parse(r.fields[2]),
+      );
     }).toList();
   }
 
-  Future<void> add(Student student) async {
+  Future<void> add(StudentModel student) async {
     final existing = await getAll();
     existing.add(student);
 
     final data = recordFormat.encode(
-      existing.map((s) => Record([s.id, s.name, s.gpa])).toList(),
+      existing
+          .map((s) => Record([s.id.toString(), s.name, s.gpa.toString()]))
+          .toList(),
     );
 
     await fileManager.write(fileName, data);
@@ -45,7 +51,9 @@ class StudentRepository {
     if (existing.length == before) return false; // مفيش حذف
 
     final data = recordFormat.encode(
-      existing.map((s) => Record([s.id, s.name, s.gpa])).toList(),
+      existing
+          .map((s) => Record([s.id.toString(), s.name, s.gpa.toString()]))
+          .toList(),
     );
 
     await fileManager.write(fileName, data);
@@ -61,7 +69,7 @@ class StudentRepository {
   // ============================
   //  UPDATE
   // ============================
-  Future<bool> update(Student updated) async {
+  Future<bool> update(StudentModel updated) async {
     final existing = await getAll();
     bool found = false;
 
@@ -76,7 +84,9 @@ class StudentRepository {
     if (!found) return false;
 
     final data = recordFormat.encode(
-      existing.map((s) => Record([s.id, s.name, s.gpa])).toList(),
+      existing
+          .map((s) => Record([s.id.toString(), s.name, s.gpa.toString()]))
+          .toList(),
     );
 
     await fileManager.write(fileName, data);
@@ -91,7 +101,7 @@ class StudentRepository {
 
     final existing = await getAll();
 
-    Student? result;
+    StudentModel? result;
     for (var s in existing) {
       if (s.id == id) {
         result = s;

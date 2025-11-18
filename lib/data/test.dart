@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'file_manager.dart';
 import 'helpers/time_measure.dart';
-import 'models/student_model.dart';
+import '../features/students/models/student_model.dart';
 import 'repository/student_repository.dart';
 import 'storage/formats/record/delimited_record.dart';
 import 'storage/formats/record/fixed_lenght_record.dart';
@@ -44,14 +44,14 @@ Choose an option: ''');
     switch (choice) {
       case '1':
         stdout.write('ID: ');
-        String id = stdin.readLineSync()!;
+        int id = int.parse(stdin.readLineSync()!);
         stdout.write('Name: ');
         String name = stdin.readLineSync()!;
         stdout.write('GPA: ');
-        String gpa = stdin.readLineSync()!;
+        int gpa = int.parse(stdin.readLineSync()!);
 
         await TimeMeasure.measureAsync('Add Student', () async {
-          await repo.add(Student(id: id, name: name, gpa: gpa));
+          await repo.add(StudentModel(id: id, name: name, gpa: gpa));
         });
 
         print('Student added.');
@@ -73,13 +73,15 @@ Choose an option: ''');
 
       case '3':
         stdout.write('ID to update: ');
-        String id = stdin.readLineSync()!;
+        int id = int.parse(stdin.readLineSync()!);
         stdout.write('New Name: ');
         String name = stdin.readLineSync()!;
         stdout.write('New GPA: ');
-        String gpa = stdin.readLineSync()!;
+        int gpa = int.parse(stdin.readLineSync()!);
 
-        bool updated = await repo.update(Student(id: id, name: name, gpa: gpa));
+        bool updated = await repo.update(
+          StudentModel(id: id, name: name, gpa: gpa),
+        );
         print(updated ? 'Student updated.' : 'Student not found.');
         break;
 
@@ -95,7 +97,7 @@ Choose an option: ''');
         String id = stdin.readLineSync()!;
         var result = await repo.search(id);
         if (result != null && result['student'] != null) {
-          var s = result['student'] as Student;
+          var s = result['student'] as StudentModel;
           print('Found: ${s.id} | ${s.name} | ${s.gpa}');
           print('Search took: ${result['time']} μs');
         } else {
