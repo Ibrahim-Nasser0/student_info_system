@@ -48,35 +48,58 @@ lib/
  │    ├── courses/
  │    │     ├── model/
  │    │     ├── view/
+ │    │     │    ├── courses_view.dart
+ │    │     │    └── components/
+ │    │     │
  │    │     └── viewModel/
  │    │ 
  │    ├── departments/
  │    │     ├── model/
  │    │     ├── view/
+ │    │     │    ├── departments_view.dart
+ │    │     │    └── components/
+ │    │     │
  │    │     └── viewModel/
  │    │ 
- │    ├── home/
+
+
+
+
+ 
+ │    ├── dashboard/
  │    │     ├── model/
  │    │     ├── view/
+ │    │     │    ├── dashboard_view.dart
+ │    │     │    └── components/
+ │    │     │
  │    │     └── viewModel/
  │    │
  │    ├── importData(CSV)/
  │    │     ├── model/
  │    │     ├── view/
+ │    │     │    ├── importData_view.dart
+ │    │     │    └── components/
+ │    │     │
  │    │     └── viewModel/
  │    │
  │    ├── settings/
  │    │     ├── model/
  │    │     ├── view/
+ │    │     │    ├── settings_view.dart
+ │    │     │    └── components/
+ │    │     │
  │    │     └── viewModel/
  │    │
  │    └── students/
  │          ├── model/
  │          ├── view/
+ │          │    ├── students_view.dart
+ │          │    └── components/
+ │          │
  │          └── viewModel/
  │    
- ├── SidebarNav/
+ ├── navSidebar/
  │        ├── components/
- │        └── view/
+ │        └── nav_sidebar_view.dart
  │
  └── main.dart

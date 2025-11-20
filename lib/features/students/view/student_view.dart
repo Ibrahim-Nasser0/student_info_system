@@ -31,7 +31,7 @@ class StudentView extends StatelessWidget {
           Gap(20),
           StudentTable(),
 
-          //  StudentDataTable(),
+        
         ],
       ),
     );

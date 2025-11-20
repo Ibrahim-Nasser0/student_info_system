@@ -6,8 +6,6 @@ import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/features/students/models/student_model.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';
 
-
-
 class StudentTable extends StatelessWidget {
   StudentTable({super.key});
   final List<StudentModel> students = [
@@ -101,7 +99,7 @@ class StudentTable extends StatelessWidget {
     double _w = MediaQuery.of(context).size.width;
     return Container(
       width: double.infinity,
-      height: 680.h,
+      height: 600.h,
       decoration: BoxDecoration(
         color: AppColors.shadow,
         borderRadius: BorderRadius.circular(10.r),

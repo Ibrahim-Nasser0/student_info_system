@@ -47,7 +47,7 @@ class CoursesTable extends StatelessWidget {
     double _w = MediaQuery.of(context).size.width;
     return Container(
       width: double.infinity,
-      height: 680.h,
+      height: 600.h,
       decoration: BoxDecoration(
         color: AppColors.shadow,
         borderRadius: BorderRadius.circular(10.r),

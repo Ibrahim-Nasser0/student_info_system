@@ -6,6 +6,7 @@ class StudentModel {
   final String email;
   final String phoneNumber;
   final String level;
+  //List Cousrses
 
   StudentModel({
     required this.id,
@@ -17,3 +18,4 @@ class StudentModel {
     this.level = 'one',
   });
 }
+

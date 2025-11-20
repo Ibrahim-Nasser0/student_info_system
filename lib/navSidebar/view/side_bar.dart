@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student_info_system/features/auth/view/login_view.dart';
 import 'package:student_info_system/features/courses/view/courses_view.dart';
 import 'package:student_info_system/features/departments/view/department_view.dart';
-import 'package:student_info_system/features/home/view/home_view.dart';
+import 'package:student_info_system/features/dashboard/view/dashboard_view.dart';
 import 'package:student_info_system/features/importData(CSV)/view/import_data.dart';
 import 'package:student_info_system/features/settings/view/settings_view.dart';
 import 'package:student_info_system/features/students/view/student_view.dart';

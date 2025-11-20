@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
-import 'package:student_info_system/features/home/view/widgets/dashboard_charts.dart';
-import 'package:student_info_system/features/home/view/widgets/dashboard_stats_grid.dart';
+import 'package:student_info_system/features/dashboard/view/widgets/dashboard_charts.dart';
+import 'package:student_info_system/features/dashboard/view/widgets/dashboard_stats_grid.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});

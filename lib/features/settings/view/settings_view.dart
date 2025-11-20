@@ -11,29 +11,23 @@ class StorageSettings extends StatefulWidget {
 
 class _StorageSettingsState extends State<StorageSettings> {
   String _recordStorageType = 'Fixed-Length';
-  String _fieldStorageFormat = 'Comma Delimited (CSV)';
+  String _fieldStorageFormat = 'Fixed-Length';
 
   final List<String> recordStorageOptions = [
+    'Delimited',
     'Fixed-Length',
-    'Variable-Length',
-    'Indexed Sequential',
+    'Number of Fields',
+    'Length-Indicator',
   ];
 
   final List<String> fieldFormatOptions = [
-    'Comma Delimited (CSV)',
-    'Tab Delimited',
-    'JSON Format',
-    'XML Format',
+    'Delimited',
+    'Fixed-Length',
+    'Keyword',
+    'Length-Indicator',
   ];
 
-  // دالة لحفظ الإعدادات (في تطبيق حقيقي، ستستخدم SharedPreferences هنا)
   void _saveSettings() {
-    // في بيئة حقيقية، يتم حفظ _recordStorageType و _fieldStorageFormat هنا
-    print('Settings Saved!');
-    print('Record Storage: $_recordStorageType');
-    print('Field Format: $_fieldStorageFormat');
-
-    // إظهار رسالة تأكيد للمستخدم
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Saved is Successfuly'),
@@ -97,7 +91,6 @@ class _StorageSettingsState extends State<StorageSettings> {
                 style: TextStyle(fontSize: 18, color: AppColors.textPrimary),
               ),
             ),
-
           ],
         ),
       ),

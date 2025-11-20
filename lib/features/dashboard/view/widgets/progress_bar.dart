@@ -2,7 +2,7 @@ import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
-import 'package:student_info_system/features/home/models/progress_model.dart';
+import 'package:student_info_system/features/dashboard/models/progress_model.dart';
 
 class ProgressBar extends StatelessWidget {
   ProgressBar({super.key, required this.progressModel, required this.color});

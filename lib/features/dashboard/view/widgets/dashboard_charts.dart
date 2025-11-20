@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:student_info_system/core/constant/app_colors.dart';
-import 'package:student_info_system/features/home/models/progress_model.dart';
-import 'package:student_info_system/features/home/view/widgets/progress_bar.dart';
+import 'package:student_info_system/features/dashboard/models/progress_model.dart';
+import 'package:student_info_system/features/dashboard/view/widgets/progress_bar.dart';
 
 class DashboardCharts extends StatelessWidget {
   const DashboardCharts({super.key});
