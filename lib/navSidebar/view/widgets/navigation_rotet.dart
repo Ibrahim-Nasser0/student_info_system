@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/features/auth/view/login_view.dart';
@@ -13,7 +12,6 @@ import 'package:student_info_system/features/students/view/student_view.dart';
 class NavigationRouter extends StatelessWidget {
   final SidebarXController controller;
 
-  // ignore: unused_element_parameter
   const NavigationRouter({super.key, required this.controller});
 
   @override
@@ -23,30 +21,29 @@ class NavigationRouter extends StatelessWidget {
       builder: (context, child) {
         switch (controller.selectedIndex) {
           case 0:
-            return DashboardView();
+            return const DashboardView();
           case 1:
-            return StudentView();
+            return const StudentView();
           case 2:
-            return CoursesView();
+            return const CoursesView();
           case 3:
-            return DepartmentView();
-
+            return const DepartmentView();
           case 4:
-            return ImportData();
+            return const ImportData();
           case 5:
-            return StorageSettings();
+            return const StorageSettings();
           case 6:
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => LoginView()),
               );
             });
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           default:
-            return Center(
+            return const Center(
               child: Text(
                 'Page not found',
-                style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
+                style: TextStyle(color: AppColors.textPrimary, fontSize: 24),
               ),
             );
         }
