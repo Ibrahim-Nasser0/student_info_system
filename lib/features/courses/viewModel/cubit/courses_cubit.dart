@@ -86,6 +86,12 @@ class CourseCubit extends Cubit<CourseState> {
     }
   }
 
+  Future<void> deleteAllCourses() async {
+    emit(CourseLoading());
+
+    await _repository.deleteAll();
+  }
+
   // ======================= SEARCH OPERATIONS =======================
 
   Future<void> searchByCode(String code) async {

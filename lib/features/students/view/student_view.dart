@@ -8,6 +8,7 @@ import 'package:student_info_system/data/repository/student_repository.dart';
 import 'package:student_info_system/features/students/view/widgets/searchin_methods.dart';
 import 'package:student_info_system/features/students/view/widgets/students_table.dart';
 import 'package:student_info_system/features/students/viewModel/cubit/student_cubit.dart';
+import 'package:student_info_system/features/students/viewModel/cubit/student_state.dart';
 
 class StudentView extends StatelessWidget {
   const StudentView({super.key});
@@ -208,30 +209,53 @@ class StudentDataRow extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.edit,
-                      color: AppColors.textPrimary,
-                      size: 30.sp,
+            BlocConsumer<StudentCubit, StudentState>(
+              listener: (context, state) {
+                if (state is StudentError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
                     ),
+                  );
+                }
+              },
+
+              builder: (context, state) {
+                return Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          showAddOrEditStudentPopup(context, student: student);
+
+                          context.read<StudentCubit>().updateStudent(student);
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: AppColors.textPrimary,
+                          size: 30.sp,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          context.read<StudentCubit>().deleteStudent(
+                            student.id,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: AppColors.accentRed,
+                          size: 30.sp,
+                        ),
+                      ),
+                      Spacer(),
+                    ],
                   ),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.delete,
-                      color: AppColors.textPrimary,
-                      size: 30.sp,
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              ),
+                );
+              },
             ),
           ],
         ),

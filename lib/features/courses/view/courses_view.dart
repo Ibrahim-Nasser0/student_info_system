@@ -9,6 +9,7 @@ import 'package:student_info_system/data/repository/course_repository.dart';
 import 'package:student_info_system/features/courses/view/widgets/searchin_methods.dart';
 import 'package:student_info_system/features/courses/view/widgets/courses_table.dart';
 import 'package:student_info_system/features/courses/viewModel/cubit/courses_cubit.dart';
+import 'package:student_info_system/features/courses/viewModel/cubit/courses_state.dart';
 
 class CoursesView extends StatelessWidget {
   const CoursesView({super.key});
@@ -209,30 +210,49 @@ class CourseDataRow extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.edit,
-                      color: AppColors.textPrimary,
-                      size: 30.sp,
+            BlocConsumer<CourseCubit, CourseState>(
+              listener: (context, state) {
+                if (state is CourseError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
                     ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                return Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          showAddOrEditCoursePopup(context, course: course);
+                          context.read<CourseCubit>().updateCourse(course);
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: AppColors.textPrimary,
+                          size: 30.sp,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          context.read<CourseCubit>().deleteCourse(course.code);
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: AppColors.accentRed,
+                          size: 30.sp,
+                        ),
+                      ),
+                      Spacer(),
+                    ],
                   ),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.delete,
-                      color: AppColors.textPrimary,
-                      size: 30.sp,
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              ),
+                );
+              },
             ),
           ],
         ),

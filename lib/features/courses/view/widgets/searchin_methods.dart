@@ -62,7 +62,7 @@ class _SearchingCoursesMethodsState extends State<SearchingCoursesMethods> {
         break;
       case 1: // Name
         // cubit.searchByName(query);
-        // مؤقتاً: بما أن الدالة غير معرفة، نعرض خطأ أو نعود للقائمة الكاملة
+
         // cubit.loadCourses();
         break;
       case 2: // Credit Hours
@@ -70,7 +70,6 @@ class _SearchingCoursesMethodsState extends State<SearchingCoursesMethods> {
         // if (hours != null) { cubit.searchByCreditHours(hours); }
         // cubit.loadCourses();
         break;
-      // ... باقي الحالات ...
       default:
         // إذا كان البحث غير بالكود، نترك الـ Cubit يعرض القائمة الكاملة مؤقتاً
         cubit.loadCourses();
@@ -99,6 +98,13 @@ class _SearchingCoursesMethodsState extends State<SearchingCoursesMethods> {
             CustomButton(
               tittle: 'Add Course',
               onPressed: () => showAddOrEditCoursePopup(context),
+            ),
+            const Gap(10),
+            CustomButton(
+              tittle: 'Delete All',
+              onPressed: () => context.read<CourseCubit>().deleteAllCourses(),
+              color: AppColors.accentRed,
+              icon: Icons.delete_forever,
             ),
           ],
         ),

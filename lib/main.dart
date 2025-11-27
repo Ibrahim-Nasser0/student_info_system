@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student_info_system/features/auth/view/login_view.dart';
 
 void main() {
-  
   runApp(const MyApp());
 }
 

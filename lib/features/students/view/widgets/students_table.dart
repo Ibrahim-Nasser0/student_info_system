@@ -65,7 +65,7 @@ class StudentTable extends StatelessWidget {
                     physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics(),
                     ),
-                    // ✅ استخدام الطول الحقيقي للقائمة
+                   
                     itemCount: studentsList.length,
                     itemBuilder: (BuildContext c, int index) {
                       return AnimationConfiguration.staggeredList(

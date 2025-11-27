@@ -27,10 +27,10 @@ class StudentCubit extends Cubit<StudentState> {
     emit(StudentLoading());
     try {
       await _repository.add(student);
-      // بعد الإضافة، نعيد تحميل القائمة لتحديث الواجهة
+
       await loadStudents();
     } catch (e) {
-      emit(StudentError("فشل إضافة الطالب: $e"));
+      emit(StudentError("faild to add the student$e"));
     }
   }
 
@@ -40,14 +40,10 @@ class StudentCubit extends Cubit<StudentState> {
     try {
       await _repository.importStudentsFromCsv(filePath: filePath);
 
-      // 3. إعادة تحميل القائمة لتحديث الواجهة بالبيانات الجديدة
       await loadStudents();
-
-      // ملاحظة: دالة loadStudents() ستغير الحالة إلى StudentLoaded عند النجاح.
     } catch (e) {
-      // 4. عرض حالة الخطأ إذا فشل الاستيراد
-      emit(StudentError("فشل استيراد بيانات الطلاب من CSV: $e"));
-      // نعيد تحميل البيانات القديمة حتى لا تبقى الشاشة فارغة
+      emit(StudentError("failed to import the students from the CSV file$e"));
+
       loadStudents();
     }
   }
@@ -59,12 +55,12 @@ class StudentCubit extends Cubit<StudentState> {
       if (success) {
         await loadStudents(); // تحديث القائمة
       } else {
-        emit(StudentError("الطالب غير موجود لتعديله"));
+        emit(StudentError("Student does not exit to edit"));
         // نعيد تحميل البيانات القديمة حتى لا تبقى الشاشة في حالة خطأ
         loadStudents();
       }
     } catch (e) {
-      emit(StudentError("فشل تعديل البيانات: $e"));
+      emit(StudentError("failed to edit: $e"));
     }
   }
 
@@ -75,12 +71,18 @@ class StudentCubit extends Cubit<StudentState> {
       if (success) {
         await loadStudents();
       } else {
-        emit(StudentError("لم يتم العثور على الطالب لحذفه"));
+        emit(StudentError("can not find the student to delete"));
         loadStudents();
       }
     } catch (e) {
-      emit(StudentError("فشل حذف الطالب: $e"));
+      emit(StudentError("failed to delete to the student: $e"));
     }
+  }
+
+  Future<void> deleteAllStudents() async {
+    emit(StudentLoading());
+
+    await _repository.deleteAll();
   }
 
   // ======================= SEARCH OPERATIONS =======================

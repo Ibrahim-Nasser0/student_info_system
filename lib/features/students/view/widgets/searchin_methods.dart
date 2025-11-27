@@ -10,7 +10,6 @@ import 'package:student_info_system/features/students/models/searching_methods_m
 import 'package:student_info_system/core/shared/custom_search_botton.dart';
 import 'package:student_info_system/features/students/viewModel/cubit/student_cubit.dart';
 
-
 class SearchingStudentMethods extends StatefulWidget {
   const SearchingStudentMethods({super.key});
 
@@ -21,7 +20,6 @@ class SearchingStudentMethods extends StatefulWidget {
 
 class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
   final TextEditingController _searchController = TextEditingController();
-
 
   int _selectedSearchIndex = 0;
 
@@ -36,7 +34,6 @@ class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
     _searchController.dispose();
     super.dispose();
   }
-
 
   void _performSearch(String query) {
     if (query.isEmpty) {
@@ -69,7 +66,6 @@ class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
       children: [
         Row(
           children: [
-
             Expanded(
               child: CustomTextField(
                 hintText:
@@ -86,6 +82,13 @@ class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
               tittle: 'Add Student',
               onPressed: () => showAddOrEditStudentPopup(context),
             ),
+            const Gap(10),
+            CustomButton(
+              tittle: 'Delete All',
+              onPressed: () => context.read<StudentCubit>().deleteAllStudents(),
+              color: AppColors.accentRed,
+              icon: Icons.delete_forever,
+            ),
           ],
         ),
         const Gap(10),
@@ -94,7 +97,7 @@ class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
           style: TextStyle(color: AppColors.textSecondary, fontSize: 25.sp),
         ),
         const Gap(10),
-        // صف أزرار اختيار طريقة البحث
+
         SearchingRow(
           searchingMethods: searchingMethods,
           selectedIndex: _selectedSearchIndex,
@@ -112,7 +115,6 @@ class _SearchingStudentMethodsState extends State<SearchingStudentMethods> {
     );
   }
 }
-
 
 class SearchingRow extends StatelessWidget {
   const SearchingRow({
@@ -143,7 +145,6 @@ class SearchingRow extends StatelessWidget {
     );
   }
 }
-
 
 void showAddOrEditStudentPopup(BuildContext context, {StudentModel? student}) {
   // نحتفظ بالكيوبت الحالي لاستخدامه داخل الديالوج
@@ -183,7 +184,7 @@ void showAddOrEditStudentPopup(BuildContext context, {StudentModel? student}) {
               CustomTextField(
                 hintText: 'ID',
                 controller: idController,
-              //  readOnly: student != null,
+                //  readOnly: student != null,
               ),
               const Gap(10),
               CustomTextField(
