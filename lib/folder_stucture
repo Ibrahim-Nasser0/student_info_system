@@ -1,0 +1,100 @@
+lib/
+ ├── core/(Core utilities and shared resources)
+ │    ├── constants/
+ │    │     └── app_colors.dart (Defines color constants for the app) 
+ │    │     
+ │    └── Shared/
+ │          ├── components/(Reusable UI components)
+ │          └── models/(Shared data models)
+ │    
+ ├── data/(Data handling and storage)
+ │    │     
+ │    ├── storage/
+ │    │     ├── file_manager.dart(Manages file read/write operations) 
+ │    │     │ 
+ │    │     ├── header/(File header definitions)
+ │    │     │      └── file_header.dart (Defines structure of file headers)
+ │    │     │  
+ │    │     ├── formats/(Different file format handlers)
+ │    │     │    ├── field/(Different field types)
+ │    │     │    │     ├── fixed_length_field.dart
+ │    │     │    │     ├── delimited_field.dart
+ │    │     │    │     ├── Keyword_field.dart
+ │    │     │    │     └── length_indicator_field.dart
+ │    |     |    |
+ │    │     │    └── record/(Different record structures)
+ │    │     │          ├── fixed_length_record.dart
+ │    │     │          ├── delimited_record.dart
+ │    │     │          ├── length_indicator_record.dart
+ │    │     │          └── number_of_field_in_record.dart
+ │    |     |
+ │    │     └── migration/(File format migration tools)
+ │    │            └── file_migrator.dart (Converts between different file formats)
+ │    │
+ │    ├── models/(Data models)
+ │    │     ├── courses_model.dart(Defines the Course data structure)
+ │    │     └── student_model.dart (Defines the Student data structure)
+ │    │
+ │    ├── repository/(Data access layer)
+ │    │     ├── courses_repositor.dart(Handles CRUD operations for Course records) 
+ │    │     └── student_repository.dart(Handles CRUD operations for Student records)
+ │    │
+ │    └── helpers/(Utility functions for data handling)
+ │          ├── file_utils.dart(General file utility functions)
+ |          └── time_measure.dart(Measures time taken for file operations)
+ | 
+ ├── features/(User interface and management features with MVVM Design Pattern)
+ │    │
+ │    ├── courses/
+ │    │     ├── model/
+ │    │     ├── view/
+ │    │     │    ├── courses_view.dart
+ │    │     │    └── components/
+ │    │     │
+ │    │     └── viewModel/
+ │    │ 
+ │    ├── departments/
+ │    │     ├── model/
+ │    │     ├── view/
+ │    │     │    ├── departments_view.dart
+ │    │     │    └── components/
+ │    │     │
+ │    │     └── viewModel/
+ │    │  
+ │    ├── dashboard/
+ │    │     ├── model/
+ │    │     ├── view/
+ │    │     │    ├── dashboard_view.dart
+ │    │     │    └── components/
+ │    │     │
+ │    │     └── viewModel/
+ │    │
+ │    ├── importData(CSV)/
+ │    │     ├── model/
+ │    │     ├── view/
+ │    │     │    ├── importData_view.dart
+ │    │     │    └── components/
+ │    │     │
+ │    │     └── viewModel/
+ │    │
+ │    ├── settings/
+ │    │     ├── model/
+ │    │     ├── view/
+ │    │     │    ├── settings_view.dart
+ │    │     │    └── components/
+ │    │     │
+ │    │     └── viewModel/
+ │    │
+ │    └── students/
+ │          ├── model/
+ │          ├── view/
+ │          │    ├── students_view.dart
+ │          │    └── components/
+ │          │
+ │          └── viewModel/
+ │    
+ ├── navSidebar/
+ │        ├── components/
+ │        └── nav_sidebar_view.dart
+ │
+ └── main.dart

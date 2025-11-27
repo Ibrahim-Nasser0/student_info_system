@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ibrahim Nasser - Ultimate Flutter Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #4caf50; /* Fresh Green */
+        --accent-color: #2196f3; /* Bright Blue */
+        --background-color: #121212; /* Deep Dark */
+        --surface-color: #1e1e1e; /* Slightly Lighter Dark */
+        --card-bg-gradient-start: #2a2a2a;
+        --card-bg-gradient-end: #1a1a1a;
+        --text-color: #e0e0e0; /* Light Gray */
+        --text-secondary-color: #a0a0a0; /* Muted Gray */
+        --link-color: var(--primary-color);
+        --hover-color: #388e3c; /* Darker Green */
+        --border-color: #333;
+        --glass-bg: rgba(255, 255, 255, 0.08); /* Light glass effect */
+        --glass-border: rgba(255, 255, 255, 0.15);
+        --neon-glow-primary: #4caf50;
+        --neon-glow-accent: #2196f3;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Global styles */
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+      }
+      a:hover {
+        color: var(--hover-color);
+      }
+
+      /* Utility classes */
+      .gradient-text {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+
+      /* Header / Navbar */
+      .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--glass-bg); /* Glass-morphism background */
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 18px 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--glass-border);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        animation: fadeInDown 0.8s ease-out;
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .main-header .logo {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.7em;
+        font-weight: 800;
+        color: var(--primary-color);
+        letter-spacing: 0.8px;
+        text-shadow: 0 0 5px var(--neon-glow-primary);
+      }
+      .main-header .nav-links a {
+        color: var(--text-secondary-color);
+        margin-left: 40px;
+        font-weight: 500;
+        font-size: 1.08em;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .main-header .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        display: block;
+        margin-top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        transition: width 0.3s ease;
+      }
+      .main-header .nav-links a:hover {
+        color: var(--text-color);
+      }
+      .main-header .nav-links a:hover::after {
+        width: 100%;
+      }
+      .main-header .social-icons {
+        display: flex;
+        align-items: center;
+      }
+      .main-header .social-icons a {
+        color: var(--text-secondary-color);
+        font-size: 1.4em;
+        margin-left: 25px;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .main-header .social-icons a:hover {
+        color: var(--primary-color);
+        transform: translateY(-4px) scale(1.15);
+        text-shadow: 0 0 8px var(--neon-glow-primary);
+      }
+
+      section {
+        padding: 150px 10%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 3.5em;
+        margin-bottom: 80px;
+        color: var(--text-color);
+        position: relative;
+        padding-bottom: 20px;
+        letter-spacing: 1px;
+      }
+      h2::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 120px;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border-radius: 3px;
+      }
+
+      /* Hero Section */
+      #hero {
+        background: radial-gradient(
+          circle at top left,
+          #1a1a1a 0%,
+          #0a0a0a 100%
+        );
+        overflow: hidden;
+        position: relative;
+        padding-top: 200px;
+        padding-bottom: 100px;
+      }
+      /* Animated background particles/shapes */
+      #hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="3" fill="%23333333"/><circle cx="75" cy="75" r="3" fill="%23333333"/></svg>')
+          repeat;
+        opacity: 0.1;
+        animation: moveBackground 30s linear infinite;
+      }
+      @keyframes moveBackground {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 1000px 1000px;
+        }
+      }
+
+      #hero h1 {
+        font-size: 6.5em;
+        margin: 0;
+        line-height: 1.1;
+        font-weight: 800;
+        text-shadow: 0 0 15px
+          rgba(var(--neon-glow-primary-rgb, 76, 175, 80), 0.6);
+        animation: textGlow 2s infinite alternate;
+      }
+      @keyframes textGlow {
+        from {
+          text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+        }
+        to {
+          text-shadow: 0 0 25px rgba(33, 150, 243, 0.7);
+        }
+      }
+      #hero h3 {
+        font-size: 2.5em;
+        color: var(--text-secondary-color);
+        margin-top: 25px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        animation: fadeIn 1.5s ease-out 0.5s forwards;
+        opacity: 0;
+      }
+      #hero .quote {
+        font-size: 1.5em;
+        margin-top: 50px;
+        font-style: italic;
+        color: var(--text-secondary-color);
+        max-width: 1000px;
+        line-height: 1.7;
+        animation: fadeIn 1.5s ease-out 1s forwards;
+        opacity: 0;
+      }
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 60px;
+        padding: 20px 45px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.3em;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 1.5s ease-out 1.5s forwards;
+        opacity: 0;
+      }
+      .cta-button:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        filter: brightness(1.1);
+      }
+      .cta-button::before {
+        /* Hover glow effect */
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.5s ease-out;
+        z-index: -1;
+      }
+      .cta-button:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      /* About Section */
+      #about {
+        background-color: var(--surface-color);
+        text-align: left;
+        padding-bottom: 100px;
+      }
+      #about .container {
+        display: flex;
+        align-items: center;
+        gap: 100px;
+        max-width: 1300px;
+        margin: 0 auto;
+        background-color: var(--card-bg-gradient-start);
+        padding: 60px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border-color);
+        animation: slideInUp 1s ease-out forwards;
+        opacity: 0;
+      }
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #about .photo-placeholder {
+        width: 350px;
+        height: 350px;
+        background-color: var(--background-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8em;
+        color: var(--text-secondary-color);
+        flex-shrink: 0;
+        border: 6px solid var(--primary-color);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        position: relative;
+      }
+      #about .photo-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      /* Animated border glow for image */
+      #about .photo-placeholder::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          var(--primary-color) 0%,
+          var(--accent-color) 30%,
+          transparent 70%
+        );
+        mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 6px),
+          #fff 100%
+        );
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 6px),
+          #fff 100%
+        );
+        animation: rotateBorder 6s linear infinite;
+      }
+      @keyframes rotateBorder {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      #about .text {
+        flex: 1;
+        padding: 0;
+      }
+      #about .text h3 {
+        font-size: 2.8em;
+        color: var(--primary-color);
+        margin-bottom: 25px;
+        letter-spacing: 0.8px;
+        font-weight: 700;
+      }
+      #about .text p {
+        font-size: 1.2em;
+        color: var(--text-secondary-color);
+        line-height: 1.9;
+        margin-bottom: 25px;
+      }
+      #about .cta-button {
+        margin-top: 40px;
+        font-size: 1.1em;
+        padding: 15px 35px;
+      }
+
+      /* Skills Section */
+      #skills {
+        background-color: var(--background-color);
+      }
+      #skills .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 50px;
+        max-width: 1300px;
+        width: 100%;
+      }
+      #skills .skill-category-card {
+        background: linear-gradient(
+          145deg,
+          var(--card-bg-gradient-start),
+          var(--card-bg-gradient-end)
+        );
+        border-radius: 18px;
+        padding: 40px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        text-align: left;
+        border: 1px solid var(--border-color);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      #skills .skill-category-card::before {
+        /* Animated corner glow */
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(
+          circle,
+          var(--primary-color) 0%,
+          transparent 60%
+        );
+        opacity: 0.2;
+        transition: transform 0.5s ease;
+        z-index: 0;
+      }
+      #skills .skill-category-card:hover::before {
+        transform: scale(1.5);
+      }
+      #skills .skill-category-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-color);
+      }
+      #skills .skill-category-card h3 {
+        font-size: 2em;
+        color: var(--primary-color);
+        margin-bottom: 35px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-weight: 700;
+        text-shadow: 0 0 5px
+          rgba(var(--neon-glow-primary-rgb, 76, 175, 80), 0.3);
+      }
+      #skills .skill-category-card h3 i {
+        color: var(--accent-color);
+        font-size: 1.3em;
+        text-shadow: 0 0 5px
+          rgba(var(--neon-glow-accent-rgb, 33, 150, 243), 0.3);
+      }
+      .skill-chip {
+        display: inline-block;
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        padding: 12px 25px;
+        margin: 10px 8px;
+        border-radius: 30px;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      .skill-chip:hover {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border-color: var(--primary-color);
+        color: white;
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Projects Section */
+      #projects {
+        background-color: var(--surface-color);
+      }
+      #projects .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 50px;
+        max-width: 1300px;
+        width: 100%;
+      }
+      .project-card {
+        background: linear-gradient(
+          145deg,
+          var(--card-bg-gradient-start),
+          var(--card-bg-gradient-end)
+        );
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border-color);
+      }
+      .project-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        border-color: var(--primary-color);
+      }
+      .project-card .image-placeholder {
+        height: 280px;
+        background-color: #3e3e60; /* Placeholder for image/GIF */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-secondary-color);
+        font-size: 1.8em;
+        border-bottom: 1px solid var(--border-color);
+        overflow: hidden;
+        position: relative;
+      }
+      .project-card .image-placeholder img {
+        /* For real images */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .project-card:hover .image-placeholder img {
+        transform: scale(1.08);
+      }
+      .project-card .card-content {
+        padding: 35px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+      .project-card h3 {
+        font-size: 2.2em;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+      .project-card p {
+        color: var(--text-secondary-color);
+        font-size: 1.1em;
+        line-height: 1.8;
+        flex-grow: 1;
+        margin-bottom: 30px;
+      }
+      .project-card .tags {
+        margin-bottom: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .project-card .tag {
+        display: inline-block;
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        font-size: 0.9em;
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+      }
+      .project-card .card-footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: flex-start;
+        gap: 25px;
+        flex-wrap: wrap;
+      }
+      .project-card .card-footer a {
+        color: var(--accent-color);
+        font-weight: 600;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+      }
+      .project-card .card-footer a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: var(--accent-color);
+        transition: width 0.3s ease;
+      }
+      .project-card .card-footer a:hover {
+        color: var(--primary-color);
+      }
+      .project-card .card-footer a:hover::after {
+        width: 100%;
+        background: var(--primary-color);
+      }
+
+      /* Certifications Section */
+      #certifications {
+        background-color: var(--background-color);
+      }
+      #certifications .certs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        max-width: 1300px;
+        width: 100%;
+      }
+      .cert-card {
+        background: linear-gradient(
+          145deg,
+          var(--card-bg-gradient-start),
+          var(--card-bg-gradient-end)
+        );
+        border-radius: 18px;
+        padding: 35px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        text-align: left;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border-left: 6px solid var(--accent-color);
+        position: relative;
+        overflow: hidden;
+      }
+      .cert-card::before {
+        /* Corner accent */
+        content: "\f02d"; /* book icon */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 3em;
+        color: var(--accent-color);
+        opacity: 0.1;
+        z-index: 0;
+        transition: transform 0.3s ease;
+      }
+      .cert-card:hover::before {
+        transform: scale(1.1) rotate(5deg);
+      }
+      .cert-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-color);
+      }
+      .cert-card h3 {
+        font-size: 1.8em;
+        color: var(--primary-color);
+        margin-bottom: 12px;
+        position: relative; /* For z-index */
+        z-index: 1;
+      }
+      .cert-card .issuer {
+        font-weight: 600;
+        color: var(--text-secondary-color);
+        font-size: 1.05em;
+        margin-top: 8px;
+        display: block;
+        position: relative;
+        z-index: 1;
+      }
+      .cert-card p {
+        font-size: 1em;
+        color: var(--text-secondary-color);
+        margin-top: 15px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Contact Section */
+      #contact {
+        background: linear-gradient(
+          135deg,
+          var(--surface-color) 0%,
+          var(--background-color) 100%
+        );
+        min-height: 70vh;
+      }
+      #contact h2 {
+        margin-bottom: 60px;
+      }
+      #contact p {
+        font-size: 1.4em;
+        color: var(--text-secondary-color);
+        margin-bottom: 60px;
+        max-width: 800px;
+        line-height: 1.7;
+      }
+      #contact .cta-button.email-button {
+        background: var(--surface-color);
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 60px;
+      }
+      #contact .cta-button.email-button:hover {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        border-color: transparent;
+      }
+      #contact .social-links a {
+        font-size: 3em;
+        margin: 0 30px;
+        color: var(--text-secondary-color);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      #contact .social-links a:hover {
+        color: var(--primary-color);
+        transform: translateY(-8px) scale(1.1);
+        text-shadow: 0 0 10px var(--neon-glow-primary);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--surface-color);
+        color: var(--text-secondary-color);
+        text-align: center;
+        padding: 30px 10%;
+        font-size: 0.9em;
+        border-top: 1px solid var(--border-color);
+      }
+      footer a {
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        #hero h1 {
+          font-size: 5em;
+        }
+        #hero h3 {
+          font-size: 2em;
+        }
+        #about .container {
+          gap: 60px;
+          padding: 40px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .main-header {
+          flex-direction: column;
+          padding: 15px 5%;
+        }
+        .main-header .nav-links {
+          margin-top: 15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .main-header .nav-links a {
+          margin: 5px 15px;
+          font-size: 1em;
+        }
+        .main-header .social-icons {
+          margin-top: 15px;
+        }
+
+        section {
+          padding: 100px 5%;
+          min-height: auto;
+        }
+        h2 {
+          font-size: 2.8em;
+          margin-bottom: 60px;
+        }
+
+        #hero h1 {
+          font-size: 4em;
+        }
+        #hero h3 {
+          font-size: 1.6em;
+        }
+        #hero .quote {
+          font-size: 1.2em;
+        }
+        .cta-button {
+          padding: 16px 35px;
+          font-size: 1.1em;
+        }
+
+        #about .container {
+          flex-direction: column;
+          text-align: center;
+          gap: 40px;
+          padding: 30px;
+        }
+        #about .photo-placeholder {
+          margin-bottom: 0;
+        }
+        #about .text h3 {
+          font-size: 2.2em;
+        }
+        #about .text p {
+          font-size: 1.05em;
+        }
+
+        #skills .skills-grid,
+        #projects .projects-grid,
+        #certifications .certs-grid {
+          grid-template-columns: 1fr;
+        }
+        #skills .skill-category-card h3 {
+          font-size: 1.6em;
+        }
+        .project-card .image-placeholder {
+          height: 220px;
+        }
+        .project-card .card-content {
+          padding: 30px;
+        }
+        .project-card h3 {
+          font-size: 1.9em;
+        }
+        .cert-card h3 {
+          font-size: 1.5em;
+        }
+
+        #contact p {
+          font-size: 1.1em;
+        }
+        #contact .social-links a {
+          font-size: 2.2em;
+          margin: 0 18px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .main-header {
+          padding: 10px 5%;
+        }
+        .main-header .nav-links {
+          display: none;
+        } /* Hide nav links on very small screens */
+        .main-header .logo {
+          font-size: 1.5em;
+        }
+        .main-header .social-icons {
+          margin-top: 0;
+        }
+
+        #hero h1 {
+          font-size: 3em;
+        }
+        #hero h3 {
+          font-size: 1.3em;
+        }
+        #hero .quote {
+          font-size: 1em;
+          margin-top: 30px;
+        }
+        .cta-button {
+          padding: 14px 28px;
+          font-size: 1em;
+        }
+
+        h2 {
+          font-size: 2em;
+          margin-bottom: 40px;
+        }
+        h2::after {
+          width: 80px;
+          height: 4px;
+        }
+
+        #about .photo-placeholder {
+          width: 250px;
+          height: 250px;
+        }
+        #about .text h3 {
+          font-size: 2em;
+        }
+
+        .skill-chip {
+          padding: 10px 18px;
+          margin: 8px 5px;
+          font-size: 0.9em;
+        }
+        .project-card .card-content {
+          padding: 25px;
+        }
+        .project-card h3 {
+          font-size: 1.7em;
+        }
+        .project-card p {
+          font-size: 0.95em;
+        }
+        .project-card .card-footer a {
+          font-size: 0.95em;
+        }
+
+        .cert-card h3 {
+          font-size: 1.4em;
+        }
+        .cert-card .issuer {
+          font-size: 0.9em;
+        }
+
+        #contact p {
+          font-size: 1em;
+          margin-bottom: 40px;
+        }
+        #contact .social-links a {
+          font-size: 1.8em;
+          margin: 0 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">Ibrahim Nasser</div>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="social-icons">
+        <a
+          href="https://www.linkedin.com/in/ibrahim-nasser-mobile"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+        <a
+          href="https://github.com/Ibrahim-Nasser0"
+          target="_blank"
+          aria-label="GitHub"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="mailto:12baraka34@gmail.com" aria-label="Email"
+          ><i class="fas fa-envelope"></i
+        ></a>
+      </div>
+    </header>
+
+    <section id="hero">
+      <h1 class="gradient-text">Ibrahim Nasser Ibrahim</h1>
+      <h3>
+        Crafting Intuitive & High-Performance Mobile Experiences with Flutter
+      </h3>
+      <p class="quote">
+        "I transform creative ideas into elegant, high-performance mobile
+        applications that are functional, delightful, and meticulously crafted
+        across both iOS and Android platforms."
+      </p>
+      <a href="#projects" class="cta-button"
+        >View My Work <i class="fas fa-arrow-right"></i
+      ></a>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="container">
+        <div class="photo-placeholder">Your Professional Photo Here</div>
+        <div class="text">
+          <h3>Hello there!</h3>
+          <p>
+            I'm Ibrahim, a passionate Flutter Developer driven by transforming
+            creative ideas into elegant, high-performance applications. My
+            expertise lies in crafting intuitive user experiences that are not
+            only functional but also delightful across both iOS and Android
+            platforms.
+          </p>
+          <p>
+            With a strong foundation in Flutter and Dart, I excel in
+            implementing robust solutions using Clean Architecture, ensuring
+            responsive UI designs, and seamlessly integrating RESTful APIs to
+            deliver efficient, scalable, and maintainable applications. My
+            commitment is always towards writing clean, well-structured code
+            while meticulously focusing on the end-user experience.
+          </p>
+          <a href="#" class="cta-button"
+            >Download My CV <i class="fas fa-download"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category-card">
+          <h3><i class="fas fa-code"></i> Programming Languages</h3>
+          <span class="skill-chip">Dart</span>
+          <span class="skill-chip">C#</span>
+          <span class="skill-chip">C++</span>
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">SQL</span>
+          <span class="skill-chip">SQLite</span>
+        </div>
+        <div class="skill-category-card">
+          <h3><i class="fab fa-flutter"></i> Framework & State Management</h3>
+          <span class="skill-chip">Flutter</span>
+          <span class="skill-chip">BLoC</span>
+          <span class="skill-chip">Cubit</span>
+          <span class="skill-chip">Provider</span>
+        </div>
+        <div class="skill-category-card">
+          <h3><i class="fas fa-object-group"></i> Architecture & Principles</h3>
+          <span class="skill-chip">Clean Architecture</span>
+          <span class="skill-chip">MVVM</span>
+          <span class="skill-chip">SOLID Principles</span>
+        </div>
+        <div class="skill-category-card">
+          <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+          <span class="skill-chip">Git</span>
+          <span class="skill-chip">GitHub</span>
+          <span class="skill-chip">Postman</span>
+          <span class="skill-chip">Android Studio</span>
+          <span class="skill-chip">VS Code</span>
+          <span class="skill-chip">Figma</span>
+        </div>
+        <div class="skill-category-card">
+          <h3><i class="fas fa-laptop-code"></i> UI/UX & Design</h3>
+          <span class="skill-chip">Material Design</span>
+          <span class="skill-chip">Cupertino Widgets</span>
+          <span class="skill-chip">Animations</span>
+          <span class="skill-chip">Responsive UI</span>
+          <span class="skill-chip">Localization (l10n)</span>
+        </div>
+        <div class="skill-category-card">
+          <h3><i class="fas fa-database"></i> Backend & APIs</h3>
+          <span class="skill-chip">Firebase (Firestore, Auth, Storage)</span>
+          <span class="skill-chip">REST APIs</span>
+          <span class="skill-chip">JSON</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="image-placeholder">Hungry App Image/GIF</div>
+          <div class="card-content">
+            <h3>Hungry App</h3>
+            <p>
+              A full-featured food ordering application focused on scalability
+              and an intuitive user experience. Engineered with Clean
+              Architecture and BLoC for robust state management and seamless
+              user flows.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">BLoC</span>
+              <span class="tag">Clean Arch.</span>
+              <span class="tag">REST API</span>
+            </div>
+            <div class="card-footer">
+              <a
+                href="https://github.com/Ibrahim-Nasser0/hungry"
+                target="_blank"
+                >View on GitHub <i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="image-placeholder">Open Fashion Image/GIF</div>
+          <div class="card-content">
+            <h3>Open Fashion (E-Store App)</h3>
+            <p>
+              A high-fidelity Flutter project translating complex Figma designs
+              into a pixel-perfect, responsive e-commerce application. Features
+              dynamic UI and efficient state management with Provider.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Provider</span>
+              <span class="tag">Responsive UI</span>
+              <span class="tag">Animations</span>
+            </div>
+            <div class="card-footer">
+              <a
+                href="https://github.com/Ibrahim-Nasser0/open_fashion"
+                target="_blank"
+                >View on GitHub <i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="image-placeholder">Library System Image/GIF</div>
+          <div class="card-content">
+            <h3>Library Management System</h3>
+            <p>
+              A robust C++ console application demonstrating core software
+              engineering principles, including OOP, data persistence with file
+              I/O, and comprehensive error handling.
+            </p>
+            <div class="tags">
+              <span class="tag">C++</span>
+              <span class="tag">OOP</span>
+              <span class="tag">File I/O</span>
+              <span class="tag">Console App</span>
+            </div>
+            <div class="card-footer">
+              <a
+                href="https://github.com/Ibrahim-Nasser0/Library-Informtion-Managemnet-System"
+                target="_blank"
+                >View on GitHub <i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <h2>My Certifications</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <h3>Mobile App Development With Flutter</h3>
+          <span class="issuer">Sprints x Microsoft</span>
+          <p>
+            Awarded for comprehensive skill development in Flutter app creation
+            and mobile development practices.
+          </p>
+        </div>
+        <div class="cert-card">
+          <h3>UI/UX Design</h3>
+          <span class="issuer">Sprints x Microsoft</span>
+          <p>
+            Mastering principles of user interface and user experience design to
+            create intuitive and engaging applications.
+          </p>
+        </div>
+        <div class="cert-card">
+          <h3>Mobile App Development with Flutter (81 Hours)</h3>
+          <span class="issuer">Udemy</span>
+          <p>
+            In-depth Flutter development course, covering advanced topics, state
+            management, and best practices for production-ready apps.
+          </p>
+        </div>
+        <div class="cert-card">
+          <h3>Mastering Object-Oriented Programming (OOP) using C++</h3>
+          <span class="issuer">MaharaTech</span>
+          <p>
+            Advanced concepts in OOP, critical for building robust, scalable,
+            and maintainable software systems.
+          </p>
+        </div>
+        <div class="cert-card">
+          <h3>The Principles of Writing Clean Code</h3>
+          <span class="issuer">MaharaTech</span>
+          <p>
+            Focus on practices for writing readable, understandable, and easily
+            extendable code, enhancing team collaboration.
+          </p>
+        </div>
+        <div class="cert-card">
+          <h3>Git and GitHub</h3>
+          <span class="issuer">Almdrasa</span>
+          <p>
+            Proficiency in version control systems, collaborative development
+            workflows, and repository management.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <p>
+        I'm currently seeking exciting new opportunities and collaborations.
+        Feel free to reach out and let's discuss how I can contribute to your
+        next groundbreaking project!
+      </p>
+      <a href="mailto:12baraka34@gmail.com" class="cta-button email-button"
+        >Send Email <i class="fas fa-paper-plane"></i
+      ></a>
+      <div class="social-links">
+        <a
+          href="https://www.linkedin.com/in/ibrahim-nasser-mobile"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+        <a
+          href="https://github.com/Ibrahim-Nasser0"
+          target="_blank"
+          aria-label="GitHub"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 Ibrahim Nasser Ibrahim. All rights reserved.</p>
+      <p>Designed and crafted with passion.</p>
+    </footer>
+  </body>
+</html>
