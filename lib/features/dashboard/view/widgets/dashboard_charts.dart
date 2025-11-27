@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/features/dashboard/models/progress_model.dart';
 import 'package:student_info_system/features/dashboard/view/widgets/progress_bar.dart';
@@ -66,7 +65,7 @@ class DashboardCharts extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(10),
+              const Gap(10),
               Container(
                 height: 300.h,
                 width: double.infinity,
@@ -104,7 +103,7 @@ class DashboardCharts extends StatelessWidget {
           );
         }
 
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

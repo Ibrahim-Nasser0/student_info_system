@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
+import 'package:student_info_system/features/dashboard/view/widgets/stat_card.dart';
 import 'package:student_info_system/features/dashboard/viewModel/cubit/dashboard_cubit.dart';
 import 'package:student_info_system/features/dashboard/viewModel/cubit/dashboard_state.dart';
 
@@ -29,22 +30,22 @@ class DashboardStatsGrid extends StatelessWidget {
 
           if (state is DashboardLoaded) {
             final statCards = [
-              _StatCard(
+              StatCard(
                 title: 'Total Students',
                 value: state.totalStudents.toString(),
                 color: AppColors.accentBlue,
               ),
-              _StatCard(
+              StatCard(
                 title: 'Departments',
                 value: state.totalDepartments.toString(),
                 color: AppColors.accentGreen,
               ),
-              _StatCard(
+              StatCard(
                 title: 'Courses',
                 value: state.totalCourses.toString(),
                 color: AppColors.accentCyan,
               ),
-              _StatCard(
+              StatCard(
                 title: 'Average GPA',
                 value: state.averageGPA.toStringAsFixed(2),
                 color: AppColors.accentOrange,
@@ -78,64 +79,6 @@ class DashboardStatsGrid extends StatelessWidget {
 
           return SizedBox();
         },
-      ),
-    );
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final Color color;
-
-  const _StatCard({
-    required this.title,
-    required this.value,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
-        gradient: LinearGradient(
-          colors: [
-            AppColors.secondaryBackground,
-            AppColors.secondaryBackground.withOpacity(0.9),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow,
-            blurRadius: 15,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      padding: EdgeInsets.all(20.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(color: AppColors.textSecondary, fontSize: 35.sp),
-          ),
-          Spacer(),
-          Center(
-            child: Text(
-              value,
-              style: TextStyle(
-                color: color,
-                fontSize: 55.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Spacer(),
-        ],
       ),
     );
   }

@@ -5,7 +5,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/data/models/student_model.dart';
-import 'package:student_info_system/features/students/view/student_view.dart';
+import 'package:student_info_system/features/students/view/widgets/student_data_row.dart';
+import 'package:student_info_system/features/students/view/widgets/student_heading_data_row.dart';
 import 'package:student_info_system/features/students/viewModel/cubit/student_cubit.dart';
 import 'package:student_info_system/features/students/viewModel/cubit/student_state.dart';
 
@@ -14,8 +15,6 @@ class StudentTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocConsumer<StudentCubit, StudentState>(
       listener: (context, state) {
         if (state is StudentError) {
@@ -32,7 +31,6 @@ class StudentTable extends StatelessWidget {
           );
         }
 
-      
         List<StudentModel> studentsList = [];
 
         if (state is StudentLoaded) {
@@ -65,7 +63,7 @@ class StudentTable extends StatelessWidget {
                     physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics(),
                     ),
-                   
+
                     itemCount: studentsList.length,
                     itemBuilder: (BuildContext c, int index) {
                       return AnimationConfiguration.staggeredList(
@@ -80,7 +78,7 @@ class StudentTable extends StatelessWidget {
                             duration: const Duration(milliseconds: 3000),
                             curve: Curves.fastLinearToSlowEaseIn,
                             flipAxis: FlipAxis.y,
-                       
+
                             child: StudentDataRow(student: studentsList[index]),
                           ),
                         ),

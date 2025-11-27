@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gap/gap.dart';
 import 'package:student_info_system/core/constant/app_colors.dart';
 import 'package:student_info_system/data/models/course_model.dart';
-import 'package:student_info_system/features/courses/view/courses_view.dart';
+import 'package:student_info_system/features/courses/view/widgets/course_data_row.dart';
+import 'package:student_info_system/features/courses/view/widgets/course_heading_data_row.dart';
 import 'package:student_info_system/features/courses/viewModel/cubit/courses_cubit.dart';
 import 'package:student_info_system/features/courses/viewModel/cubit/courses_state.dart';
 
@@ -25,7 +25,7 @@ class CoursesTable extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        // 1. استخراج القائمة وتحديد المصدر
+
         List<CourseModel> courses = [];
         bool isSearching = false;
 
@@ -36,7 +36,6 @@ class CoursesTable extends StatelessWidget {
           isSearching = true;
         }
 
-        // 2. التعامل مع حالة التحميل
         if (state is CourseLoading) {
           return SizedBox(
             height: 600.h,
@@ -44,8 +43,6 @@ class CoursesTable extends StatelessWidget {
           );
         }
 
-        // 3. التعامل مع حالة عدم وجود بيانات (بعد محاولة التحميل)
-        // إذا كانت القائمة فارغة والـ State ليس في حالة التهيئة الأولية أو التحميل
         if (courses.isEmpty && state is! CourseInitial) {
           return SizedBox(
             height: 600.h,
@@ -59,7 +56,6 @@ class CoursesTable extends StatelessWidget {
           );
         }
 
-        // 4. عرض الجدول
         return Container(
           width: double.infinity,
           height: 600.h,

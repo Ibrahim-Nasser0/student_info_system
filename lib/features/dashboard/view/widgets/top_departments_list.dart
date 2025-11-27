@@ -31,7 +31,7 @@ class TopDepartments extends StatelessWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(

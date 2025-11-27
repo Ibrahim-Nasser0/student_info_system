@@ -40,20 +40,15 @@ class DashboardView extends StatelessWidget {
             const DashboardStatsGrid(),
             const Gap(30),
 
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(flex: 2, child: const TopStudentsList()),
-                const Gap(10),
-
+                Expanded(flex: 2, child: TopStudentsList()),
+                Gap(10),
                 Expanded(
                   flex: 4,
                   child: Column(
-                    children: [
-                      const TopDepartments(),
-                      const Gap(10),
-                      const DashboardCharts(),
-                    ],
+                    children: [TopDepartments(), Gap(10), DashboardCharts()],
                   ),
                 ),
               ],
