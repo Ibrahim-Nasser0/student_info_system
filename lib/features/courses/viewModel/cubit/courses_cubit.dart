@@ -16,7 +16,7 @@ class CourseCubit extends Cubit<CourseState> {
       final courses = await _repository.getAll();
       emit(CourseLoaded(courses));
     } catch (e) {
-      emit(CourseError("فشل تحميل الكورسات: $e"));
+      emit(CourseError("Course loading failed:$e"));
     }
   }
 
@@ -26,30 +26,30 @@ class CourseCubit extends Cubit<CourseState> {
     emit(CourseLoading());
     try {
       await _repository.add(course);
-      await loadCourses(); // إعادة التحميل لتحديث القائمة
+      await loadCourses();
     } catch (e) {
-      // هنا نمسك الـ Exception الخاص بتكرار الكود
+   
       emit(CourseError(e.toString().replaceAll("Exception:", "")));
-      // نعيد تحميل البيانات القديمة حتى لا تبقى الشاشة فارغة
+     
       loadCourses();
     }
   }
 
   Future<void> importCourses(String filePath) async {
-    // 1. عرض حالة التحميل
+   
     emit(CourseLoading());
     try {
-      // 2. استدعاء دالة الـ Repository (يجب أن تكون موجودة)
+  
       await _repository.importCoursesFromCsv(filePath: filePath);
 
-      // 3. إعادة تحميل القائمة لتحديث الواجهة بالبيانات الجديدة
+
       await loadCourses();
 
-      // ملاحظة: دالة loadCourses() ستغير الحالة إلى CourseLoaded عند النجاح.
+   
     } catch (e) {
-      // 4. عرض حالة الخطأ إذا فشل الاستيراد
-      emit(CourseError("فشل استيراد بيانات الكورسات من CSV: $e"));
-      // نعيد تحميل البيانات القديمة حتى لا تبقى الشاشة فارغة
+   
+      emit(CourseError("Failed to import course data from CSV:$e"));
+     
       loadCourses();
     }
   }
@@ -61,11 +61,11 @@ class CourseCubit extends Cubit<CourseState> {
       if (success) {
         await loadCourses();
       } else {
-        emit(CourseError("الكورس غير موجود لتعديله"));
+        emit(CourseError("The course could not be found to update."));
         loadCourses();
       }
     } catch (e) {
-      emit(CourseError("فشل تعديل الكورس: $e"));
+      emit(CourseError("Course update failed:$e"));
       loadCourses();
     }
   }
@@ -77,11 +77,11 @@ class CourseCubit extends Cubit<CourseState> {
       if (success) {
         await loadCourses();
       } else {
-        emit(CourseError("لم يتم العثور على الكورس لحذفه"));
+        emit(CourseError("The course could not be found to delete."));
         loadCourses();
       }
     } catch (e) {
-      emit(CourseError("فشل حذف الكورس: $e"));
+      emit(CourseError("Course deletion failed:$e"));
       loadCourses();
     }
   }
@@ -99,19 +99,19 @@ class CourseCubit extends Cubit<CourseState> {
     try {
       final result = await _repository.searchByCode(code);
       if (result != null) {
-        // نضع النتيجة في قائمة لتسهيل العرض في نفس الجدول
+     
         emit(CourseSearchLoaded([result]));
       } else {
-        emit(CourseError("لم يتم العثور على كورس بهذا الكود"));
-        // اختياري: هل تريد العودة للقائمة الأصلية أم البقاء؟
-        // loadCourses();
+        emit(CourseError("No course was found with this code."));
+       
+         loadCourses();
       }
     } catch (e) {
-      emit(CourseError("حدث خطأ أثناء البحث: $e"));
+      emit(CourseError("An error occurred during the search: $e"));
     }
   }
 
-  // دالة للعودة من وضع البحث إلى القائمة الكاملة
+
   void clearSearch() {
     loadCourses();
   }

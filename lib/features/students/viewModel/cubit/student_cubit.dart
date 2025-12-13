@@ -17,7 +17,7 @@ class StudentCubit extends Cubit<StudentState> {
 
       emit(StudentLoaded(students));
     } catch (e) {
-      emit(StudentError("فشل تحميل البيانات: $e"));
+      emit(StudentError("faild load students$e"));
     }
   }
 
@@ -35,7 +35,7 @@ class StudentCubit extends Cubit<StudentState> {
   }
 
   Future<void> importStudents(String filePath) async {
-    // 1. عرض حالة التحميل
+
     emit(StudentLoading());
     try {
       await _repository.importStudentsFromCsv(filePath: filePath);
@@ -53,10 +53,10 @@ class StudentCubit extends Cubit<StudentState> {
     try {
       final success = await _repository.update(student);
       if (success) {
-        await loadStudents(); // تحديث القائمة
+        await loadStudents();
       } else {
         emit(StudentError("Student does not exit to edit"));
-        // نعيد تحميل البيانات القديمة حتى لا تبقى الشاشة في حالة خطأ
+       
         loadStudents();
       }
     } catch (e) {
@@ -92,7 +92,7 @@ class StudentCubit extends Cubit<StudentState> {
     try {
       final result = await _repository.searchByID(id);
       if (result != null) {
-        // نضع النتيجة في قائمة لأن الـ State يتوقع قائمة
+      
         emit(StudentSearchLoaded([result]));
       } else {
         emit(StudentError("This student does not exist"));

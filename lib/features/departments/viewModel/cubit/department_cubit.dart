@@ -8,19 +8,16 @@ class DepartmentCubit extends Cubit<DepartmentState> {
 
   DepartmentCubit(this._repository) : super(DepartmentInitial());
 
-  /// يجلب أسماء جميع الأقسام الفريدة الموجودة في بيانات الطلاب والكورسات.
   Future<void> loadAllDepartmentNames() async {
     emit(DepartmentLoading());
     try {
       final names = await _repository.getAllDepartmentNames();
       emit(DepartmentNamesLoaded(names));
     } catch (e) {
-      emit(DepartmentError("فشل تحميل قائمة الأقسام: $e"));
+      emit(DepartmentError("Failed to load the list of Department: $e"));
     }
   }
 
-  /// يجلب تفاصيل قسم محدد (قائمة الطلاب والكورسات التابعة له).
-  // داخل DepartmentCubit
   Future<void> loadAllDepartmentDetails() async {
     emit(DepartmentLoading());
     try {
@@ -45,7 +42,7 @@ class DepartmentCubit extends Cubit<DepartmentState> {
 
       emit(DepartmentDetailsSummaryLoaded(departments));
     } catch (e) {
-      emit(DepartmentError("فشل تحميل الأقسام: $e"));
+      emit(DepartmentError("Failed to load the Department:$e"));
     }
   }
 
@@ -65,22 +62,16 @@ class DepartmentCubit extends Cubit<DepartmentState> {
         ),
       );
     } catch (e) {
-      emit(DepartmentError("فشل تحميل تفاصيل القسم: $e"));
+      emit(DepartmentError("Failed to load the detils of Department:$e"));
     }
   }
 
   Future<void> createReportFile(String departmentName) async {
-    // يمكن هنا استخدام حالة Loading مع رسالة مخصصة
-    // emit(DepartmentLoading());
+    emit(DepartmentLoading());
     try {
       await _repository.createDepartmentFile(departmentName);
-
-      // لا نحتاج لتغيير الـ State إذا كانت العملية نجحت
-      // يمكن عرض SnackBar بدلاً من تغيير الحالة
     } catch (e) {
-      // إذا فشلت عملية إنشاء الملف
-      emit(DepartmentError("فشل إنشاء ملف تقرير القسم: $e"));
-      // يمكن استدعاء loadDepartmentDetails(departmentName) للعودة للحالة السابقة
+      emit(DepartmentError("Failed $e"));
     }
   }
 }
